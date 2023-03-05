@@ -9,10 +9,24 @@ struct Vertex
 {
   double x, y;
   HalfEdge *incident_edge;
+  Vertex(double x, double y)
+  {
+    this->x = x;
+    this->y = y;
+  }
+  Vertex() {}
 
   bool operator==(const Vertex &other) const
   {
     return x == other.x && y == other.y;
+  }
+  void print()
+  {
+    cout << "(" << x << ", " << y << ") ";
+  }
+  std::ostream &operator<<(std::ostream &os)
+  {
+    return os << "(" << x << ", " << y << ")";
   }
 };
 
@@ -29,7 +43,7 @@ bool ang_leq_180(Vertex *a, Vertex *b, Vertex *c)
 bool v_is_notch(Vertex *a, Vertex *b, Vertex *c)
 {
   // return cross_product(a, b, c) < 0;
-  return !ang_leq_180(a, b, c);
+  return ang_leq_180(a, b, c);
 }
 
 struct HalfEdge
@@ -39,9 +53,16 @@ struct HalfEdge
   HalfEdge *next;
   Face *incident_face;
   Vertex *destination() { return twin->origin; }
+  // tested
   bool lies_on_left(Vertex *v)
   {
     return ang_leq_180(destination(), origin, v);
+  }
+  void print()
+  {
+    origin->print();
+    cout << " -> ";
+    destination()->print();
   }
 };
 
@@ -66,13 +87,29 @@ public:
   {
     vertices.erase(remove(vertices.begin(), vertices.end(), v), vertices.end());
   }
-
+  // tested
   bool is_notch(Vertex *v)
   {
-    auto a = v->incident_edge->twin->next->destination();
+    Vertex *a = v->incident_edge->destination();
     auto b = v;
-    auto c = v->incident_edge->next->destination();
-    return v_is_notch(a, b, c);
+    auto c = v->incident_edge->twin->next->destination();
+    // cout << "a: ";
+    // a->print();
+    // b->print();
+    // c->print();
+    // cout << endl;
+    return ang_leq_180(a, b, c);
+  }
+
+  void printFromVertex(Vertex *v)
+  {
+    cout << "Vertices from v are\n";
+    auto e = v->incident_edge;
+    do
+    {
+      cout << "(" << e->origin->x << ", " << e->origin->y << ")" << endl;
+      e = e->next;
+    } while (e != v->incident_edge);
   }
 
   vector<Vertex *> get_notches()
@@ -107,6 +144,7 @@ public:
   {
     auto e = this->half_edges[0];
     bool on_left = e->lies_on_left(v);
+    // cout << on_left << endl;
     do
     {
       if (e->lies_on_left(v) != on_left)

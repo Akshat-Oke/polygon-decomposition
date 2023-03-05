@@ -4,38 +4,53 @@
 
 using namespace std;
 
-void decompose(vector<Vertex *> vertices);
+vector<Vertex *> decompose(vector<Vertex *> vertices);
+Vertex *next_v(vector<Vertex *> vertices, Vertex *v);
 vector<Vertex *> read_vertices(char *filename);
 
+void testDCEL(vector<Vertex *> LPVS)
+{
+  // DCEL dcel;
+  // dcel.initialize(vertices);
+  // Vertex v{300, 250};
+  auto min_y = min_element(LPVS.begin(), LPVS.end(), [](Vertex *a, Vertex *b)
+                           { return a->x < b->x; });
+  (*min_y)->print();
+}
+vector<Vertex *> rotate_forward(vector<Vertex *> v)
+{
+  vector<Vertex *> result;
+  for (int i = 1; i < v.size(); i++)
+  {
+    result.push_back(v[i]);
+  }
+  result.push_back(v[0]);
+  return result;
+}
 int main(int argc, char *argv[])
 {
   vector<Vertex *> vertices;
   vertices = read_vertices(argv[1]);
-  decompose(vertices);
-  // for (auto v : vertices)
-  // {
-  //   cout << v->x << " " << v->y << endl;
-  // }
-  // Vertex *v = vertices[0];
-  // cout << "Removed one" << endl;
-  // vertices.erase(remove(vertices.begin(), vertices.end(), v), vertices.end());
-  // for (auto v : vertices)
-  // {
-  //   cout << v->x << " " << v->y << endl;
-  // }
+  auto new_p_vertices = decompose(vertices);
+  while (new_p_vertices.size() > 3)
+  {
+    new_p_vertices = rotate_forward(new_p_vertices);
+    new_p_vertices = decompose(new_p_vertices);
+  }
+  // testDCEL(vertices);
 }
 
 Vertex *next_v(vector<Vertex *> vertices, Vertex *v)
 {
-  auto it = find(vertices.begin(), vertices.end(), v);
-  if (it != vertices.end())
+  int i = 0;
+  for (; i < vertices.size(); i++)
   {
-    return *(it + 1);
+    if (vertices[i] == v)
+    {
+      break;
+    }
   }
-  else
-  {
-    return vertices[0];
-  }
+  return vertices[(i + 1) % vertices.size()];
 }
 
 vector<Vertex *> subtract(vector<Vertex *> a, vector<Vertex *> b)
@@ -74,7 +89,7 @@ void print(vector<Vertex *> v)
   }
 }
 
-void decompose(vector<Vertex *> vertices)
+vector<Vertex *> decompose(vector<Vertex *> vertices)
 {
   DCEL dcel_p, dcel_l;
   dcel_p.initialize(vertices);
@@ -84,10 +99,10 @@ void decompose(vector<Vertex *> vertices)
   while (dcel_p.vertices.size() > 3)
   {
     cout << "dcel_p.vertices.size() = " << dcel_p.vertices.size() << endl;
-    cout << "Notches are\n";
+    // cout << "Notches are\n";
     auto notches_in_p = dcel_p.get_notches();
-    print(notches_in_p);
-    vector<Vertex *> v;
+    // print(notches_in_p);
+    vector<Vertex *> v; // = dcel_p.vertices;
     /// v(1) = Last[L]
     v.push_back(L.back());
     // get next vertex to L.back() in dcel_p.vertices
@@ -120,7 +135,9 @@ void decompose(vector<Vertex *> vertices)
     {
       /// P = P - L
       auto LPVS = subtract(dcel_p.vertices, L);
-      LPVS = subtract(LPVS, notches_in_p);
+      auto no_notches = subtract(LPVS, notches_in_p);
+      LPVS = subtract(LPVS, no_notches);
+      print(LPVS);
       while (LPVS.size() > 0)
       {
         auto min_x = min_element(LPVS.begin(), LPVS.end(), [](Vertex *a, Vertex *b)
@@ -135,15 +152,17 @@ void decompose(vector<Vertex *> vertices)
         bool backward = false;
         while (!backward and LPVS.size() > 0)
         {
-          /// v = First(LPVS)
           while (true)
           {
+            if (LPVS.size() == 0)
+              break;
+            /// v = First(LPVS)
             Vertex *v = LPVS[0];
+            cout << "v is ";
+            v->print();
+            cout << endl;
             if (!r.contains(v))
             {
-              cout << "asd" << endl;
-              /// L = L + {v}
-              L.push_back(v);
               /// LPVS = LPVS - {v}
               LPVS.erase(remove(LPVS.begin(), LPVS.end(), v), LPVS.end());
               cout << "Erased, now size: " << LPVS.size() << endl;
@@ -157,12 +176,11 @@ void decompose(vector<Vertex *> vertices)
             dcel_l.initialize(L);
             if (dcel_l.is_inside(LPVS[0]))
             {
-              backward = true;
               vector<Vertex *> VTR;
-              bool on_left = ang_leq_180(LPVS[0], v[0], L.back());
+              bool side = ang_leq_180(LPVS[0], v[0], L.back());
               for (auto l_v : dcel_l.vertices)
               {
-                if (ang_leq_180(LPVS[0], v[0], l_v) == on_left)
+                if (ang_leq_180(LPVS[0], v[0], l_v) == side)
                 {
                   VTR.push_back(l_v);
                 }
@@ -171,22 +189,40 @@ void decompose(vector<Vertex *> vertices)
               {
                 L.erase(remove(L.begin(), L.end(), vtr_v), L.end());
               }
+              backward = true;
             }
             LPVS.erase(remove(LPVS.begin(), LPVS.end(), LPVS[0]), LPVS.end());
-          }
-        }
-      }
+          } // if lpvs > 0
+        }   // while !backward and lpvs > 0
+      }     // while lpvs > 0
     }
-    if (L.back() != v[1])
+    if (L.back() != v[1]) // if L has atleast 3 vertices
     {
       cout << "Found convex polygon" << endl;
-      dcel_p.vertices = subtract(dcel_p.vertices, L);
+      auto p_new = subtract(dcel_p.vertices, L);
+      vector<Vertex *> first_last_l = {L.front(), L.back()};
+      auto p_nn = subtract(dcel_p.vertices, p_new);
+      p_nn = subtract(p_nn, first_last_l);
+
+      dcel_p.vertices = subtract(dcel_p.vertices, p_nn);
+
+      // dcel_p.vertices = subtract(dcel_p.vertices, L);
+      print(L);
       // insert L.back() as first of dcel_p.vertices
-      dcel_p.vertices.insert(dcel_p.vertices.begin(), L.back());
-      dcel_p.vertices.push_back(L.front());
+      // dcel_p.vertices.insert(dcel_p.vertices.begin(), L.back());
+      // dcel_p.vertices.insert(dcel_p.vertices.begin(), L.front());
+      cout << "----New P----\n";
+      print(dcel_p.vertices);
       dcel_p.init();
     }
+    else
+    {
+      // L has 2 vertices
+      cout << "L failed to form a convex polygon" << endl;
+      return dcel_p.vertices;
+    }
   }
+  return dcel_p.vertices;
 }
 
 vector<Vertex *> read_vertices(char *filename)
