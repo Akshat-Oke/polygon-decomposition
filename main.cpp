@@ -1,6 +1,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
-#include "dcel.cpp"
+#include "dcel.hpp"
 
 using namespace std;
 
