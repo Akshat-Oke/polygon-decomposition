@@ -1,2 +1,2 @@
-g++ main.cpp merge.cpp -o main
+g++ main.cpp dcel.cpp merge.cpp -o main
 ./main input.txt

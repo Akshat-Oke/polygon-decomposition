@@ -2,8 +2,6 @@
 #include <bits/stdc++.h>
 #include "dcel.hpp"
 
-#include "dcel.cpp"
-
 using namespace std;
 
 vector<Vertex *> decompose(vector<Vertex *> vertices);
