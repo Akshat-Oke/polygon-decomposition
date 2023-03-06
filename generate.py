@@ -28,7 +28,7 @@ def generate_polygon(center: Tuple[float, float], avg_radius: float,
         num_vertices (int):
             the number of vertices of the polygon.
     Returns:
-        List[Tuple[float, float]]: list of vertices, in CCW order.
+        List[Tuple[float, float]]: list of vertices, in C order.
     """
     # Parameter check
     if irregularity < 0 or irregularity > 1:
