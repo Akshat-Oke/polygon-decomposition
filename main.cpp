@@ -34,6 +34,26 @@ vector<Vertex *> rotate_forward(vector<Vertex *> v)
   result.push_back(v[0]);
   return result;
 }
+
+void writePolygons(vector<DCEL *> polygons)
+{
+  cout << "Open output.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
+  ofstream myfile;
+  myfile.open("output.txt");
+  myfile << polygons.size() << endl;
+  for (int i = 0; i < polygons.size(); i++)
+  {
+    auto p = polygons[i];
+    // myfile << i << endl;
+    myfile << p->vertices.size() << endl;
+    for (int j = 0; j < p->vertices.size(); j++)
+    {
+      myfile << p->vertices[j]->x << " " << p->vertices[j]->y << endl;
+    }
+  }
+  myfile.close();
+}
+
 int main(int argc, char *argv[])
 {
   decomposition.clear();
@@ -61,6 +81,7 @@ int main(int argc, char *argv[])
     cout << "\n---Final polygon---\n";
     p->print();
   }
+  writePolygons(final_polygons);
 }
 
 bool colinear(vector<Vertex *> polygon)
