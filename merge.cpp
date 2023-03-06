@@ -7,6 +7,12 @@ using namespace std;
 void testMerge(vector<vector<Vertex *>> decomposition, vector<Vertex *> original_v, vector<vector<Vertex *>> diagonals, bool lastPolygonWasConstructed)
 {
   initMerge(decomposition, original_v, diagonals, lastPolygonWasConstructed);
+  // is_notch for every vertex
+  for (int i = 0; i < original_vertices.size(); i++)
+  {
+    auto v = original_vertices[i];
+    cout << "is_notch(" << v->x << ", " << v->y << "): " << orig_dcel.is_notch(v) << endl;
+  }
   // after initMerge
   for (int i = 0; i < LLE.size(); i++)
   {
@@ -40,6 +46,12 @@ void testMerge(vector<vector<Vertex *>> decomposition, vector<Vertex *> original
     vt->print();
     cout << "u: " << find_polygon_u_vs_for_vt(vt, vs) << endl;
   }
+  cout << "Last Polygon added ";
+  cout << lastPolygonWasConstructed << endl;
+  for (auto d : lastPolygonDiagonals)
+  {
+    d->print();
+  }
 }
 void print_vector(vector<int> v)
 {
@@ -55,25 +67,26 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
   initMerge(decomposition, original_v, diagonals, lastPolygonWasConstructed);
   int m = LLE.size();
   int NP = m + 1;
-  // cout << "NP is " << NP << endl;
+  NP += lastPolygonWasConstructed;
   for (int j = 0; j < m; j++)
   {
+    cout << "\n---New iteration---NP is " << NP << endl;
     auto vs = LLE[j]->vs;
     auto vt = LLE[j]->vt;
     auto LP_vs = LP(vs);
     auto LP_vt = LP(vt);
-    // cout << "LUP\n";
-    // print_vector(LUP);
+    cout << "LUP\n";
+    print_vector(LUP);
     if (
-        // true ||
+        true ||
         (LP_vs.size() >= 2 && LP_vs.size() >= 2) ||
         (LP_vs.size() >= 2 && !orig_dcel.is_notch(vt)) ||
         (LP_vt.size() >= 2 && !orig_dcel.is_notch(vs)) ||
         (!orig_dcel.is_notch(vs) && !orig_dcel.is_notch(vt)))
     {
       auto j2 = vt, i2 = vs;
-      // cout << "Inspecting diagonal ";
-      // LLE[j]->print();
+      cout << "Inspecting diagonal ";
+      LLE[j]->print();
 
       auto j3 = polygons[LUP[j]]->next_v(vt);
       auto i1 = polygons[LUP[j]]->prev_v(vs);
@@ -81,10 +94,11 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
       if (u == -1)
       {
         cout << "No diagonal found for " << j << endl;
-        exit(1);
+        // exit(1);
+        continue;
       }
-      // cout << "Found u as " << u << endl;
-      // cout << "LUP.size() = " << LUP.size() << endl;
+      cout << "Found u as " << u << endl;
+      cout << "LUP.size() = " << LUP.size() << endl;
       auto j1 = polygons[LUP[u]]->prev_v(vt);
       auto i3 = polygons[LUP[u]]->next_v(vs);
       // cout << "Checking angle for ";
@@ -97,7 +111,6 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
       // j3->print();
       if (ang_leq_180(i1, i2, i3) && ang_leq_180(j1, j2, j3))
       {
-        NP += 1;
         cout << "Found polygon merging " << j << " and " << u << endl;
         LDP[j] = false;
         LDP[u] = false;
@@ -128,6 +141,8 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
           }
         }
 
+        NP += 1;
+
         auto new_polygon_vertices = subtract(original_vertices, polygons[j]->vertices);
         new_polygon_vertices = subtract(new_polygon_vertices, polygons[u]->vertices);
         new_polygon_vertices = subtract(original_vertices, new_polygon_vertices);
@@ -147,6 +162,7 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
         {
           polygons.push_back(new_polygon);
         }
+        cout << "\nDone processing new polygon\n";
       }
     }
   }
@@ -215,7 +231,7 @@ void initMerge(vector<vector<Vertex *>> decomposition, vector<Vertex *> original
     auto lastPolygonV = polygons.back()->vertices;
     for (int i = 0; i < lastPolygonV.size(); i++)
     {
-      Diagonal *d = new Diagonal(lastPolygonV[(i + 1) % lastPolygonV.size()], lastPolygonV[i]);
+      Diagonal *d = new Diagonal(lastPolygonV[i], lastPolygonV[(i + 1) % lastPolygonV.size()]);
       lastPolygonDiagonals.push_back(d);
     }
   }
@@ -225,26 +241,30 @@ void initMerge(vector<vector<Vertex *>> decomposition, vector<Vertex *> original
 vector<pair<int, Vertex *>> LP(Vertex *v)
 {
   vector<pair<int, Vertex *>> result;
-  // for (auto polygon_dcel : polygons)
+  // for (int i = 0; i < LLE.size(); i++)
   // {
-  //   auto polygon = polygon_dcel->vertices;
-  //   for (int i = 0; i < polygon.size(); i++)
+  //   if (LLE[i]->vs == v && next_v(original_vertices, v) != LLE[i]->vt)
   //   {
-  //     if (polygon[LUP[i]] == v)
-  //     {
-  //       if (next_v(original_vertices, v) == NULL)
-  //         result.push_back(make_pair(i, polygon[(i + 1) % polygon.size()]));
-  //     }
+  //     result.push_back(make_pair(LUP[i], LLE[i]->vt));
   //   }
   // }
   // return result;
-  for (int i = 0; i < LLE.size(); i++)
+  for (int ip = 0; ip < polygons.size(); ip++)
   {
-    if (LLE[i]->vs == v && next_v(original_vertices, v) != LLE[i]->vt)
+    auto polygon_dcel = polygons[LUP[ip]];
+    auto vertices = polygon_dcel->vertices;
+    for (int i = 0; i < vertices.size(); i++)
     {
-      result.push_back(make_pair(LUP[i], LLE[i]->vt));
+      auto vertex = vertices[i];
+      auto next_vertex = vertices[(i + 1) % vertices.size()];
+      if (vertex == v && next_v(original_vertices, vertex) != next_vertex)
+      {
+        // if (next_v(original_vertices, v) != )
+        result.push_back(make_pair(ip, next_vertex));
+      }
     }
   }
+  // return result;
   for (auto d : lastPolygonDiagonals)
   {
     if (d->vs == v && next_v(original_vertices, v) != d->vt)

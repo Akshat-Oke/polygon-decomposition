@@ -54,6 +54,24 @@ void writePolygons(vector<DCEL *> polygons)
   myfile.close();
 }
 
+void writeDecomposition(vector<vector<Vertex *>> decomposition)
+{
+  cout << "Open decomposition.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
+  ofstream myfile;
+  myfile.open("decomposition.txt");
+  myfile << decomposition.size() << endl;
+  for (int i = 0; i < decomposition.size(); i++)
+  {
+    auto p = decomposition[i];
+    // myfile << i << endl;
+    myfile << p.size() << endl;
+    for (int j = 0; j < p.size(); j++)
+    {
+      myfile << p[j]->x << " " << p[j]->y << endl;
+    }
+  }
+  myfile.close();
+}
 int main(int argc, char *argv[])
 {
   decomposition.clear();
@@ -73,7 +91,8 @@ int main(int argc, char *argv[])
     decomposition.push_back(new_p_vertices);
   }
   //   testDCEL(vertices);
-  // testMerge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
+  writeDecomposition(decomposition);
+  testMerge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
   auto final_polygons = merge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
   cout << "----Final merged polyons----\n";
   for (auto p : final_polygons)

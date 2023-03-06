@@ -24,7 +24,7 @@ def generate_draw_write(irreg, spike, vert_count):
     plt.show()
 
     vertices.reverse()
-    with open('input.txt', 'w') as file:
+    with open('input_py.txt', 'w') as file:
         file.write(str(len(vertices)) + '\n')
         for element in vertices:
             a, b = element
@@ -35,7 +35,7 @@ def read_draw():
     y = []
     count = -1
 
-    with open('input.txt','r') as file:
+    with open('input_py.txt','r') as file:
         for line in file:
             if count == -1:
                 count += 1
@@ -55,7 +55,7 @@ def read_draw():
     plt.plot(end_x, end_y, color='black')
     plt.show()
 
-if sys.argv[1] == '0':
-	generate_draw_write(0.5, 0.7, 25)
-elif sys.argv[1] == '1':
+if sys.argv[1] == 'gen':
+	generate_draw_write(0.5, 0.3, int(sys.argv[2]))
+elif sys.argv[1] == 'draw':
 	read_draw()
