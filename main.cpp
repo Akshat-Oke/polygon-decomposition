@@ -2,20 +2,26 @@
 #include <bits/stdc++.h>
 #include "dcel.hpp"
 
+#include "dcel.cpp"
+
 using namespace std;
 
 vector<Vertex *> decompose(vector<Vertex *> vertices);
 Vertex *next_v(vector<Vertex *> vertices, Vertex *v);
 vector<Vertex *> read_vertices(char *filename);
+bool colinear(vector<Vertex *> polygon);
+
+vector<vector<Vertex *>> decomposition;
 
 void testDCEL(vector<Vertex *> LPVS)
 {
   // DCEL dcel;
   // dcel.initialize(vertices);
   // Vertex v{300, 250};
-  auto min_y = min_element(LPVS.begin(), LPVS.end(), [](Vertex *a, Vertex *b)
-                           { return a->x < b->x; });
-  (*min_y)->print();
+  //   auto min_y = min_element(LPVS.begin(), LPVS.end(), [](Vertex *a, Vertex *b)
+  //                            { return a->x < b->x; });
+  //   (*min_y)->print();
+  std::cout << colinear(LPVS);
 }
 vector<Vertex *> rotate_forward(vector<Vertex *> v)
 {
@@ -29,6 +35,7 @@ vector<Vertex *> rotate_forward(vector<Vertex *> v)
 }
 int main(int argc, char *argv[])
 {
+  decomposition.clear();
   vector<Vertex *> vertices;
   vertices = read_vertices(argv[1]);
   auto new_p_vertices = decompose(vertices);
@@ -37,7 +44,45 @@ int main(int argc, char *argv[])
     new_p_vertices = rotate_forward(new_p_vertices);
     new_p_vertices = decompose(new_p_vertices);
   }
-  // testDCEL(vertices);
+  //   testDCEL(vertices);
+}
+
+bool colinear(vector<Vertex *> polygon)
+{
+  int x_neq = 0, y_neq = 0;
+
+  for (int i = 1; i < polygon.size(); i++)
+  {
+    if (polygon[i]->x != polygon[i - 1]->x)
+      x_neq = 1;
+
+    if (polygon[i]->y != polygon[i - 1]->y)
+      y_neq = 1;
+
+    if (x_neq && y_neq)
+      break;
+  }
+
+  if (!(x_neq && y_neq))
+    return true;
+
+  float curr_m, prev_m;
+
+  for (int i = 1; i < polygon.size(); i++)
+  {
+    if (polygon[i]->x == polygon[i - 1]->x || polygon[i]->y == polygon[i - 1]->y)
+      return false;
+
+    curr_m = (polygon[i]->y - polygon[i - 1]->y) / (polygon[i]->x - polygon[i - 1]->x);
+
+    if (i > 1)
+      if (curr_m != prev_m)
+        return false;
+
+    prev_m = curr_m;
+  }
+
+  return true;
 }
 
 Vertex *next_v(vector<Vertex *> vertices, Vertex *v)
@@ -198,7 +243,7 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
     }
     if (L.back() != v[1]) // if L has atleast 3 vertices
     {
-      cout << "Found convex polygon" << endl;
+      //   cout << "Found convex polygon" << endl;
       auto p_new = subtract(dcel_p.vertices, L);
       vector<Vertex *> first_last_l = {L.front(), L.back()};
       auto p_nn = subtract(dcel_p.vertices, p_new);
@@ -207,7 +252,14 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
       dcel_p.vertices = subtract(dcel_p.vertices, p_nn);
 
       // dcel_p.vertices = subtract(dcel_p.vertices, L);
-      print(L);
+      //   print(L);
+
+      if (!colinear(L))
+      {
+        decomposition.push_back(L);
+        std::cout << "Found convex polygon" << std::endl;
+        print(L);
+      }
       // insert L.back() as first of dcel_p.vertices
       // dcel_p.vertices.insert(dcel_p.vertices.begin(), L.back());
       // dcel_p.vertices.insert(dcel_p.vertices.begin(), L.front());
