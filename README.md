@@ -19,7 +19,9 @@ Run `bash run.bash`
 
 ## Output format
 
-The program writes the decomposed polgons to `output.txt` with the number of polygons on the first line and for each polygon, the number of points in that polygon followed by its points as in the input format.
+The program writes the decomposed (and merged) polgons to `output.txt` with the number of polygons on the first line and for each polygon, the number of points in that polygon followed by its points as in the input format.
+
+Decomposed polygons not merged are saved to `decomposition.txt`.
 
 ```
 [number of polygons]
@@ -31,3 +33,5 @@ x1 y1
 x2 y2
 ...
 ```
+
+The program opens a window displaying the decomposition without merging. On closing this window it opens another window showing the decomposition after merging.

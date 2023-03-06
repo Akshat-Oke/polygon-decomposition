@@ -1,3 +1,4 @@
+import sys
 import turtle
 
 # Create a turtle object
@@ -31,7 +32,7 @@ def draw(filename, offset, scale=1):
           # line = file.readline().split()
           t.goto(float(line1[0]), float(line1[1]))
 
-draw("output.txt", 0)
+draw(sys.argv[1], 0)
 # draw("decomposition.txt", 0)
 # Hide the turtle when done
 t.hideturtle()
