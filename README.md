@@ -1,8 +1,12 @@
 # Decompose Polygon into convex polygons
 
+## Creating polygons
+
+Run `python3 draw.py gen` to generate polygons and save it to `input_py.txt`.
+
 ## Input format
 
-Enter the polygon in `input.txt` with each point on one line with its coordinates (x, y) separated by a space. Specify total number of points on the first line.
+Enter the polygon in `input_py.txt` (or any other file) with each point on one line with its coordinates (x, y) separated by a space. Specify total number of points on the first line.
 
 > The points must be in clockwise order
 
