@@ -10,6 +10,7 @@ struct Vertex;
 double cross_product(Vertex *a, Vertex *b, Vertex *c);
 bool ang_leq_180(Vertex *a, Vertex *b, Vertex *c);
 bool v_is_notch(Vertex *a, Vertex *b, Vertex *c);
+Vertex *next_v(vector<Vertex *> vertices, Vertex *v);
 struct Vertex
 {
   double x, y;
@@ -147,6 +148,40 @@ public:
     return true;
   }
 
+  Vertex *next_v(Vertex *v)
+  {
+    int i = 0;
+    for (; i < vertices.size(); i++)
+    {
+      if (vertices[i] == v)
+      {
+        break;
+      }
+    }
+    return vertices[(i + 1) % vertices.size()];
+    // return v->incident_edge->next->destination();
+  }
+  Vertex *prev_v(Vertex *v)
+  {
+    int i = 0;
+    for (; i < vertices.size(); i++)
+    {
+      if (vertices[i] == v)
+      {
+        break;
+      }
+    }
+    return vertices[(i - 1 + vertices.size()) % vertices.size()];
+  }
+  void print()
+  {
+    for (auto v : vertices)
+    {
+      v->print();
+      cout << endl;
+    }
+  }
+
   void initialize(vector<Vertex *> verts)
   {
     this->vertices = verts;
@@ -194,4 +229,12 @@ public:
     add_face(f);
   }
 };
+
+struct Decomposition
+{
+  vector<Vertex *> vertices;
+  DCEL dcel;
+  HalfEdge *diagonal;
+};
+
 #endif

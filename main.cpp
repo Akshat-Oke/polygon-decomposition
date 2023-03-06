@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include "dcel.hpp"
+#include "merge.hpp"
 
 using namespace std;
 
@@ -10,6 +11,8 @@ vector<Vertex *> read_vertices(char *filename);
 bool colinear(vector<Vertex *> polygon);
 
 vector<vector<Vertex *>> decomposition;
+vector<vector<Vertex *>> diagonals;
+bool lastPolygonWasConstructed = false;
 
 void testDCEL(vector<Vertex *> LPVS)
 {
@@ -36,13 +39,28 @@ int main(int argc, char *argv[])
   decomposition.clear();
   vector<Vertex *> vertices;
   vertices = read_vertices(argv[1]);
+  auto vertices_copy = vertices;
   auto new_p_vertices = decompose(vertices);
   while (new_p_vertices.size() > 3)
   {
     new_p_vertices = rotate_forward(new_p_vertices);
     new_p_vertices = decompose(new_p_vertices);
   }
+  // add new_p_vertices as a decomposition if it has 3 vertices
+  if (new_p_vertices.size() == 3 && !colinear(new_p_vertices))
+  {
+    lastPolygonWasConstructed = true;
+    decomposition.push_back(new_p_vertices);
+  }
   //   testDCEL(vertices);
+  // testMerge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
+  auto final_polygons = merge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
+  cout << "----Final merged polyons----\n";
+  for (auto p : final_polygons)
+  {
+    cout << "\n---Final polygon---\n";
+    p->print();
+  }
 }
 
 bool colinear(vector<Vertex *> polygon)
@@ -85,13 +103,19 @@ bool colinear(vector<Vertex *> polygon)
 
 Vertex *next_v(vector<Vertex *> vertices, Vertex *v)
 {
+  bool found = false;
   int i = 0;
   for (; i < vertices.size(); i++)
   {
     if (vertices[i] == v)
     {
+      found = true;
       break;
     }
+  }
+  if (!found)
+  {
+    return NULL;
   }
   return vertices[(i + 1) % vertices.size()];
 }
@@ -141,7 +165,7 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
 
   while (dcel_p.vertices.size() > 3)
   {
-    cout << "dcel_p.vertices.size() = " << dcel_p.vertices.size() << endl;
+    // cout << "dcel_p.vertices.size() = " << dcel_p.vertices.size() << endl;
     // cout << "Notches are\n";
     auto notches_in_p = dcel_p.get_notches();
     // print(notches_in_p);
@@ -201,9 +225,9 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
               break;
             /// v = First(LPVS)
             Vertex *v = LPVS[0];
-            cout << "v is ";
-            v->print();
-            cout << endl;
+            // cout << "v is ";
+            // v->print();
+            // cout << endl;
             if (!r.contains(v))
             {
               /// LPVS = LPVS - {v}
@@ -255,7 +279,9 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
       if (!colinear(L))
       {
         decomposition.push_back(L);
-        std::cout << "Found convex polygon" << std::endl;
+        diagonals.push_back({L.back(), L.front()});
+        std::cout
+            << "Found convex polygon" << std::endl;
         print(L);
       }
       // insert L.back() as first of dcel_p.vertices
