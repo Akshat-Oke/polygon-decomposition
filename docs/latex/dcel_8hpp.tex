@@ -1,0 +1,122 @@
+\hypertarget{dcel_8hpp}{}\doxysection{new/dcel.hpp File Reference}
+\label{dcel_8hpp}\index{new/dcel.hpp@{new/dcel.hpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structVertex}{Vertex}}
+\item 
+struct \mbox{\hyperlink{structFace}{Face}}
+\item 
+struct \mbox{\hyperlink{structHalfEdge}{Half\+Edge}}
+\item 
+class \mbox{\hyperlink{classDCEL}{DCEL}}
+\item 
+struct \mbox{\hyperlink{structDecomposition}{Decomposition}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{dcel_8hpp_a6e396faaad4c172b7442d75d1897e25c}{cross\+\_\+product}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$c)
+\begin{DoxyCompactList}\small\item\em ba x ca \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{dcel_8hpp_a1ca8b3dff83944aa4af8088dde745719}{ang\+\_\+leq\+\_\+180}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Checks if angle abc is less than or equal to 180 degrees. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{dcel_8hpp_a6d1146ecc8f925f4e5b27988d89b9d3a}{v\+\_\+is\+\_\+notch}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Checks if vertex v is a notch. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{dcel_8hpp_a7cb1d70a4abdd82bdcd693d882316dc8}{next\+\_\+v}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ vertices, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Get next vertex in order from the vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dcel_8hpp_a1ca8b3dff83944aa4af8088dde745719}\label{dcel_8hpp_a1ca8b3dff83944aa4af8088dde745719}} 
+\index{dcel.hpp@{dcel.hpp}!ang\_leq\_180@{ang\_leq\_180}}
+\index{ang\_leq\_180@{ang\_leq\_180}!dcel.hpp@{dcel.hpp}}
+\doxysubsubsection{\texorpdfstring{ang\_leq\_180()}{ang\_leq\_180()}}
+{\footnotesize\ttfamily bool ang\+\_\+leq\+\_\+180 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{c }\end{DoxyParamCaption})}
+
+
+
+Checks if angle abc is less than or equal to 180 degrees. 
+
+The angle swept by a counterclockwise rotation from line segment ba to line segment bc . c / This will be true. / b ./\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+.a
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+{\em c} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if angle is less than or equal to 180 degrees. 
+
+false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dcel_8hpp_a6e396faaad4c172b7442d75d1897e25c}\label{dcel_8hpp_a6e396faaad4c172b7442d75d1897e25c}} 
+\index{dcel.hpp@{dcel.hpp}!cross\_product@{cross\_product}}
+\index{cross\_product@{cross\_product}!dcel.hpp@{dcel.hpp}}
+\doxysubsubsection{\texorpdfstring{cross\_product()}{cross\_product()}}
+{\footnotesize\ttfamily double cross\+\_\+product (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{c }\end{DoxyParamCaption})}
+
+
+
+ba x ca 
+
+Computes cross product ba$\ast$ca. . c / This will be positive. / b ./\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+.a
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+{\em c} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double k component of the product. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dcel_8hpp_a7cb1d70a4abdd82bdcd693d882316dc8}\label{dcel_8hpp_a7cb1d70a4abdd82bdcd693d882316dc8}} 
+\index{dcel.hpp@{dcel.hpp}!next\_v@{next\_v}}
+\index{next\_v@{next\_v}!dcel.hpp@{dcel.hpp}}
+\doxysubsubsection{\texorpdfstring{next\_v()}{next\_v()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ next\+\_\+v (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{vertices,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})}
+
+
+
+Get next vertex in order from the vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Vertices in clockwise order \\
+\hline
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vertex$\ast$ Next in order to v 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dcel_8hpp_a6d1146ecc8f925f4e5b27988d89b9d3a}\label{dcel_8hpp_a6d1146ecc8f925f4e5b27988d89b9d3a}} 
+\index{dcel.hpp@{dcel.hpp}!v\_is\_notch@{v\_is\_notch}}
+\index{v\_is\_notch@{v\_is\_notch}!dcel.hpp@{dcel.hpp}}
+\doxysubsubsection{\texorpdfstring{v\_is\_notch()}{v\_is\_notch()}}
+{\footnotesize\ttfamily bool v\+\_\+is\+\_\+notch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{c }\end{DoxyParamCaption})}
+
+
+
+Checks if vertex v is a notch. 
+
+Notch is when the angle abc is a reflex angle. . a / This will be true. / b ./\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+.c 
+\begin{DoxyParams}{Parameters}
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if v is a notch. 
+
+false otherwise. 
+\end{DoxyReturn}

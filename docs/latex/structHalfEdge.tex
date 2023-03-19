@@ -1,0 +1,87 @@
+\hypertarget{structHalfEdge}{}\doxysection{Half\+Edge Struct Reference}
+\label{structHalfEdge}\index{HalfEdge@{HalfEdge}}
+
+
+{\ttfamily \#include $<$dcel.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{structHalfEdge_ac851fc610a81f57f89e8b33bb3dac432}{destination}} () const
+\item 
+bool \mbox{\hyperlink{structHalfEdge_a624ae284aaa204cd0cb1122d94e66eca}{lies\+\_\+on\+\_\+left}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+void \mbox{\hyperlink{structHalfEdge_af063f7c5dff6be55c704ff2e8b9592bc}{print}} ()
+\item 
+bool \mbox{\hyperlink{structHalfEdge_aeb3e7214e5ade3b7b25c39d6bd2e268c}{equals}} (const \mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{structHalfEdge_a8c90288f66768884f42b0588055eb4bf}{origin}}
+\item 
+\mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$ \mbox{\hyperlink{structHalfEdge_a37e7696a7131767a0c76e45ed69be4c5}{twin}}
+\item 
+\mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$ \mbox{\hyperlink{structHalfEdge_a5918db069bb8b4a89e471c01a14fc6e1}{next}}
+\item 
+\mbox{\hyperlink{structFace}{Face}} $\ast$ \mbox{\hyperlink{structHalfEdge_a9789e7ff95143bdff974c574d9b7cd6d}{incident\+\_\+face}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structHalfEdge_ac851fc610a81f57f89e8b33bb3dac432}\label{structHalfEdge_ac851fc610a81f57f89e8b33bb3dac432}} 
+\index{HalfEdge@{HalfEdge}!destination@{destination}}
+\index{destination@{destination}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{destination()}{destination()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ Half\+Edge\+::destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structHalfEdge_aeb3e7214e5ade3b7b25c39d6bd2e268c}\label{structHalfEdge_aeb3e7214e5ade3b7b25c39d6bd2e268c}} 
+\index{HalfEdge@{HalfEdge}!equals@{equals}}
+\index{equals@{equals}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{equals()}{equals()}}
+{\footnotesize\ttfamily bool Half\+Edge\+::equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structHalfEdge_a624ae284aaa204cd0cb1122d94e66eca}\label{structHalfEdge_a624ae284aaa204cd0cb1122d94e66eca}} 
+\index{HalfEdge@{HalfEdge}!lies\_on\_left@{lies\_on\_left}}
+\index{lies\_on\_left@{lies\_on\_left}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{lies\_on\_left()}{lies\_on\_left()}}
+{\footnotesize\ttfamily bool Half\+Edge\+::lies\+\_\+on\+\_\+left (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structHalfEdge_af063f7c5dff6be55c704ff2e8b9592bc}\label{structHalfEdge_af063f7c5dff6be55c704ff2e8b9592bc}} 
+\index{HalfEdge@{HalfEdge}!print@{print}}
+\index{print@{print}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void Half\+Edge\+::print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structHalfEdge_a9789e7ff95143bdff974c574d9b7cd6d}\label{structHalfEdge_a9789e7ff95143bdff974c574d9b7cd6d}} 
+\index{HalfEdge@{HalfEdge}!incident\_face@{incident\_face}}
+\index{incident\_face@{incident\_face}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{incident\_face}{incident\_face}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structFace}{Face}}$\ast$ Half\+Edge\+::incident\+\_\+face}
+
+\mbox{\Hypertarget{structHalfEdge_a5918db069bb8b4a89e471c01a14fc6e1}\label{structHalfEdge_a5918db069bb8b4a89e471c01a14fc6e1}} 
+\index{HalfEdge@{HalfEdge}!next@{next}}
+\index{next@{next}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHalfEdge}{Half\+Edge}}$\ast$ Half\+Edge\+::next}
+
+\mbox{\Hypertarget{structHalfEdge_a8c90288f66768884f42b0588055eb4bf}\label{structHalfEdge_a8c90288f66768884f42b0588055eb4bf}} 
+\index{HalfEdge@{HalfEdge}!origin@{origin}}
+\index{origin@{origin}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{origin}{origin}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structVertex}{Vertex}}$\ast$ Half\+Edge\+::origin}
+
+\mbox{\Hypertarget{structHalfEdge_a37e7696a7131767a0c76e45ed69be4c5}\label{structHalfEdge_a37e7696a7131767a0c76e45ed69be4c5}} 
+\index{HalfEdge@{HalfEdge}!twin@{twin}}
+\index{twin@{twin}!HalfEdge@{HalfEdge}}
+\doxysubsubsection{\texorpdfstring{twin}{twin}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHalfEdge}{Half\+Edge}}$\ast$ Half\+Edge\+::twin}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+new/\mbox{\hyperlink{dcel_8hpp}{dcel.\+hpp}}\end{DoxyCompactItemize}

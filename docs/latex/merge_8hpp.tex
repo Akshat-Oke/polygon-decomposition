@@ -1,0 +1,205 @@
+\hypertarget{merge_8hpp}{}\doxysection{new/merge.hpp File Reference}
+\label{merge_8hpp}\index{new/merge.hpp@{new/merge.hpp}}
+{\ttfamily \#include \char`\"{}dcel.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$bits/stdc++.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structDiagonal}{Diagonal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ pair$<$ int, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{merge_8hpp_ae6ee7ac37d892fdeb75763efbf0b329e}{LP}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Find the next vertex in all polygons. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}{subtract}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ a, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ b)
+\begin{DoxyCompactList}\small\item\em Subtract two vectors. Preserves the order of the first vector. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{merge_8hpp_a8903cd9c5f70a66c698d423cb7d51a0b}{find\+\_\+polygon\+\_\+u\+\_\+vs\+\_\+for\+\_\+vt}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$vt, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$vs)
+\item 
+void \mbox{\hyperlink{merge_8hpp_ae87467527b21e31f9e722cd2f131b03a}{init\+Merge}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ original\+\_\+v, vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}}, bool \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{last\+Polygon\+Was\+Constructed}})
+\begin{DoxyCompactList}\small\item\em Sets up the global variables for the merge algorithm. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a040674d822fa35e828944a0d16d7c2c0}{merge}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ original\+\_\+v, vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}}, bool \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{last\+Polygon\+Was\+Constructed}})
+\begin{DoxyCompactList}\small\item\em Tries to merge polygons in the decomposition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{merge_8hpp_aa29e1edd25a27d289771a3da9cabe971}{test\+Merge}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ original\+\_\+v, vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}}, bool \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{last\+Polygon\+Was\+Constructed}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a24fbbe5dcd72b6acbffff697cee9a371}{original\+\_\+vertices}}
+\item 
+\mbox{\hyperlink{classDCEL}{DCEL}} \mbox{\hyperlink{merge_8hpp_a569d7a30bec8f30ff357cd05e11875c8}{orig\+\_\+dcel}}
+\item 
+vector$<$ \mbox{\hyperlink{structDiagonal}{Diagonal}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a4d118269486abfa19d3231142a879bc5}{LLE}}
+\begin{DoxyCompactList}\small\item\em Diagonals of the partition(decomposition) \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}{polygons}}
+\item 
+vector$<$ \mbox{\hyperlink{structDiagonal}{Diagonal}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_aef37ba928efb9251e3b711e444bc6bb8}{last\+Polygon\+Diagonals}}
+\item 
+vector$<$ bool $>$ \mbox{\hyperlink{merge_8hpp_a97d689ea49e2a15661d4789ea2a299ff}{LDP}}
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{merge_8hpp_abe9fc9c819d6d857381c6801d8baee80}{LUP}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{merge_8hpp_a8903cd9c5f70a66c698d423cb7d51a0b}\label{merge_8hpp_a8903cd9c5f70a66c698d423cb7d51a0b}} 
+\index{merge.hpp@{merge.hpp}!find\_polygon\_u\_vs\_for\_vt@{find\_polygon\_u\_vs\_for\_vt}}
+\index{find\_polygon\_u\_vs\_for\_vt@{find\_polygon\_u\_vs\_for\_vt}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{find\_polygon\_u\_vs\_for\_vt()}{find\_polygon\_u\_vs\_for\_vt()}}
+{\footnotesize\ttfamily int find\+\_\+polygon\+\_\+u\+\_\+vs\+\_\+for\+\_\+vt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{vt,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{vs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{merge_8hpp_ae87467527b21e31f9e722cd2f131b03a}\label{merge_8hpp_ae87467527b21e31f9e722cd2f131b03a}} 
+\index{merge.hpp@{merge.hpp}!initMerge@{initMerge}}
+\index{initMerge@{initMerge}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{initMerge()}{initMerge()}}
+{\footnotesize\ttfamily void init\+Merge (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{decomposition,  }\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{original\+\_\+v,  }\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{diagonals,  }\item[{bool}]{last\+Polygon\+Was\+Constructed }\end{DoxyParamCaption})}
+
+
+
+Sets up the global variables for the merge algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decomposition} & \\
+\hline
+{\em original\+\_\+v} & \\
+\hline
+{\em diagonals} & \\
+\hline
+{\em last\+Polygon\+Was\+Constructed} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{merge_8hpp_ae6ee7ac37d892fdeb75763efbf0b329e}\label{merge_8hpp_ae6ee7ac37d892fdeb75763efbf0b329e}} 
+\index{merge.hpp@{merge.hpp}!LP@{LP}}
+\index{LP@{LP}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{LP()}{LP()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ int, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ LP (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})}
+
+
+
+Find the next vertex in all polygons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+next verties with their associated polygon index
+\end{DoxyReturn}
+Find the next vertex in all polygons.
+
+LP(vj) is a list containing pairs (k, vr) where k is the index of a polygon containing vj as one of its vertices and vr is the next vertex to vj in that polygon k, but these pairs are in LPvj only if vr is not the consecutive vertex of vj in the initial polygon, i.\+e., if vjvr is a diagonal,
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vj \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$pair$<$int, Vertex $\ast$$>$$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{merge_8hpp_a040674d822fa35e828944a0d16d7c2c0}\label{merge_8hpp_a040674d822fa35e828944a0d16d7c2c0}} 
+\index{merge.hpp@{merge.hpp}!merge@{merge}}
+\index{merge@{merge}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ merge (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{decomposition,  }\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{original\+\_\+v,  }\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{diagonals,  }\item[{bool}]{last\+Polygon\+Was\+Constructed }\end{DoxyParamCaption})}
+
+
+
+Tries to merge polygons in the decomposition. 
+
+Polygons are merged such that the resulting polygon stays convex.
+
+
+\begin{DoxyParams}{Parameters}
+{\em decomposition} & \\
+\hline
+{\em original\+\_\+v} & Original polygon\textquotesingle{}s vertices \\
+\hline
+{\em diagonals} & The diagonals that form the decomposition. These must not be the sides of the original polygon. \\
+\hline
+{\em last\+Polygon\+Was\+Constructed} & If the last polygon of the decomposition was constructed from the diagonals. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+DCEL $\ast$$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{merge_8hpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}\label{merge_8hpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}} 
+\index{merge.hpp@{merge.hpp}!subtract@{subtract}}
+\index{subtract@{subtract}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{subtract()}{subtract()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ subtract (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{a,  }\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{b }\end{DoxyParamCaption})}
+
+
+
+Subtract two vectors. Preserves the order of the first vector. 
+
+Finds the elements of the first vector that are not in the second vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Vertex $\ast$$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{merge_8hpp_aa29e1edd25a27d289771a3da9cabe971}\label{merge_8hpp_aa29e1edd25a27d289771a3da9cabe971}} 
+\index{merge.hpp@{merge.hpp}!testMerge@{testMerge}}
+\index{testMerge@{testMerge}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{testMerge()}{testMerge()}}
+{\footnotesize\ttfamily void test\+Merge (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{decomposition,  }\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{original\+\_\+v,  }\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{diagonals,  }\item[{bool}]{last\+Polygon\+Was\+Constructed }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{merge_8hpp_aef37ba928efb9251e3b711e444bc6bb8}\label{merge_8hpp_aef37ba928efb9251e3b711e444bc6bb8}} 
+\index{merge.hpp@{merge.hpp}!lastPolygonDiagonals@{lastPolygonDiagonals}}
+\index{lastPolygonDiagonals@{lastPolygonDiagonals}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{lastPolygonDiagonals}{lastPolygonDiagonals}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{structDiagonal}{Diagonal}} $\ast$$>$ last\+Polygon\+Diagonals\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{merge_8hpp_a97d689ea49e2a15661d4789ea2a299ff}\label{merge_8hpp_a97d689ea49e2a15661d4789ea2a299ff}} 
+\index{merge.hpp@{merge.hpp}!LDP@{LDP}}
+\index{LDP@{LDP}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{LDP}{LDP}}
+{\footnotesize\ttfamily vector$<$bool$>$ LDP\hspace{0.3cm}{\ttfamily [inline]}}
+
+whether polygon is definite polygon \mbox{\Hypertarget{merge_8hpp_a4d118269486abfa19d3231142a879bc5}\label{merge_8hpp_a4d118269486abfa19d3231142a879bc5}} 
+\index{merge.hpp@{merge.hpp}!LLE@{LLE}}
+\index{LLE@{LLE}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{LLE}{LLE}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{structDiagonal}{Diagonal}} $\ast$$>$ LLE\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Diagonals of the partition(decomposition) 
+
+\mbox{\Hypertarget{merge_8hpp_abe9fc9c819d6d857381c6801d8baee80}\label{merge_8hpp_abe9fc9c819d6d857381c6801d8baee80}} 
+\index{merge.hpp@{merge.hpp}!LUP@{LUP}}
+\index{LUP@{LUP}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{LUP}{LUP}}
+{\footnotesize\ttfamily vector$<$int$>$ LUP\hspace{0.3cm}{\ttfamily [inline]}}
+
+LUP\mbox{[}i\mbox{]} = j means that polygon i is part of polygon j \mbox{\Hypertarget{merge_8hpp_a569d7a30bec8f30ff357cd05e11875c8}\label{merge_8hpp_a569d7a30bec8f30ff357cd05e11875c8}} 
+\index{merge.hpp@{merge.hpp}!orig\_dcel@{orig\_dcel}}
+\index{orig\_dcel@{orig\_dcel}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{orig\_dcel}{orig\_dcel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDCEL}{DCEL}} orig\+\_\+dcel\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{merge_8hpp_a24fbbe5dcd72b6acbffff697cee9a371}\label{merge_8hpp_a24fbbe5dcd72b6acbffff697cee9a371}} 
+\index{merge.hpp@{merge.hpp}!original\_vertices@{original\_vertices}}
+\index{original\_vertices@{original\_vertices}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{original\_vertices}{original\_vertices}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{structVertex}{Vertex}} $\ast$$>$ original\+\_\+vertices\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}\label{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}} 
+\index{merge.hpp@{merge.hpp}!polygons@{polygons}}
+\index{polygons@{polygons}!merge.hpp@{merge.hpp}}
+\doxysubsubsection{\texorpdfstring{polygons}{polygons}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{classDCEL}{DCEL}} $\ast$$>$ polygons\hspace{0.3cm}{\ttfamily [inline]}}
+

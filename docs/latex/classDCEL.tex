@@ -1,0 +1,151 @@
+\hypertarget{classDCEL}{}\doxysection{DCEL Class Reference}
+\label{classDCEL}\index{DCEL@{DCEL}}
+
+
+{\ttfamily \#include $<$dcel.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classDCEL_a96106b3321c038de1dd513b45695b080}{add\+\_\+vertex}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+void \mbox{\hyperlink{classDCEL_a26d15abaecce5fe0d20c73b9f5ba52bf}{remove\+\_\+vertex}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+bool \mbox{\hyperlink{classDCEL_afec87f58d3a3d38374eaf26fa68c90c3}{is\+\_\+notch}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+void \mbox{\hyperlink{classDCEL_a59185b6194533b526a177ed46293002b}{print\+From\+Vertex}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{classDCEL_ab270b5e53b60ec0fcc05e5b79be37049}{get\+\_\+notches}} ()
+\item 
+void \mbox{\hyperlink{classDCEL_a65eb7f22eb4d85bfdde5efd84bc592aa}{add\+\_\+half\+\_\+edge}} (\mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$e)
+\item 
+void \mbox{\hyperlink{classDCEL_a016c043a22e047bc950df78ce52ab0bf}{add\+\_\+face}} (\mbox{\hyperlink{structFace}{Face}} $\ast$f)
+\item 
+void \mbox{\hyperlink{classDCEL_af6f76302bc67bd19eeb41e1788bad7aa}{init}} ()
+\item 
+bool \mbox{\hyperlink{classDCEL_a70b0817060afb6f97fd1b514b9c25419}{is\+\_\+inside}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+\mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classDCEL_aafacceed40ca92e6e9533d9543c70538}{next\+\_\+v}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+\mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classDCEL_ac61cb1eb35920924c61041ef2c53ed8e}{prev\+\_\+v}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\item 
+void \mbox{\hyperlink{classDCEL_a9699210170686f652178211b4ce991f8}{print}} ()
+\item 
+void \mbox{\hyperlink{classDCEL_a7abbb3062e4b8be7594bb3b3dcd1fdac}{initialize}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ verts)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{classDCEL_a6339be2488749b653dc02bab4c1e5655}{vertices}}
+\item 
+vector$<$ \mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$ $>$ \mbox{\hyperlink{classDCEL_ab94ff526bfd8ac8a3fe8312d5c09d483}{half\+\_\+edges}}
+\item 
+vector$<$ \mbox{\hyperlink{structFace}{Face}} $\ast$ $>$ \mbox{\hyperlink{classDCEL_a0dfce903b2956a78c6aa143a2226365f}{faces}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDCEL_a016c043a22e047bc950df78ce52ab0bf}\label{classDCEL_a016c043a22e047bc950df78ce52ab0bf}} 
+\index{DCEL@{DCEL}!add\_face@{add\_face}}
+\index{add\_face@{add\_face}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{add\_face()}{add\_face()}}
+{\footnotesize\ttfamily void DCEL\+::add\+\_\+face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFace}{Face}} $\ast$}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a65eb7f22eb4d85bfdde5efd84bc592aa}\label{classDCEL_a65eb7f22eb4d85bfdde5efd84bc592aa}} 
+\index{DCEL@{DCEL}!add\_half\_edge@{add\_half\_edge}}
+\index{add\_half\_edge@{add\_half\_edge}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{add\_half\_edge()}{add\_half\_edge()}}
+{\footnotesize\ttfamily void DCEL\+::add\+\_\+half\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a96106b3321c038de1dd513b45695b080}\label{classDCEL_a96106b3321c038de1dd513b45695b080}} 
+\index{DCEL@{DCEL}!add\_vertex@{add\_vertex}}
+\index{add\_vertex@{add\_vertex}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{add\_vertex()}{add\_vertex()}}
+{\footnotesize\ttfamily void DCEL\+::add\+\_\+vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_ab270b5e53b60ec0fcc05e5b79be37049}\label{classDCEL_ab270b5e53b60ec0fcc05e5b79be37049}} 
+\index{DCEL@{DCEL}!get\_notches@{get\_notches}}
+\index{get\_notches@{get\_notches}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{get\_notches()}{get\_notches()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ DCEL\+::get\+\_\+notches (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_af6f76302bc67bd19eeb41e1788bad7aa}\label{classDCEL_af6f76302bc67bd19eeb41e1788bad7aa}} 
+\index{DCEL@{DCEL}!init@{init}}
+\index{init@{init}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void DCEL\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a7abbb3062e4b8be7594bb3b3dcd1fdac}\label{classDCEL_a7abbb3062e4b8be7594bb3b3dcd1fdac}} 
+\index{DCEL@{DCEL}!initialize@{initialize}}
+\index{initialize@{initialize}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily void DCEL\+::initialize (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{verts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a70b0817060afb6f97fd1b514b9c25419}\label{classDCEL_a70b0817060afb6f97fd1b514b9c25419}} 
+\index{DCEL@{DCEL}!is\_inside@{is\_inside}}
+\index{is\_inside@{is\_inside}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{is\_inside()}{is\_inside()}}
+{\footnotesize\ttfamily bool DCEL\+::is\+\_\+inside (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_afec87f58d3a3d38374eaf26fa68c90c3}\label{classDCEL_afec87f58d3a3d38374eaf26fa68c90c3}} 
+\index{DCEL@{DCEL}!is\_notch@{is\_notch}}
+\index{is\_notch@{is\_notch}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{is\_notch()}{is\_notch()}}
+{\footnotesize\ttfamily bool DCEL\+::is\+\_\+notch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_aafacceed40ca92e6e9533d9543c70538}\label{classDCEL_aafacceed40ca92e6e9533d9543c70538}} 
+\index{DCEL@{DCEL}!next\_v@{next\_v}}
+\index{next\_v@{next\_v}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{next\_v()}{next\_v()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ DCEL\+::next\+\_\+v (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_ac61cb1eb35920924c61041ef2c53ed8e}\label{classDCEL_ac61cb1eb35920924c61041ef2c53ed8e}} 
+\index{DCEL@{DCEL}!prev\_v@{prev\_v}}
+\index{prev\_v@{prev\_v}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{prev\_v()}{prev\_v()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ DCEL\+::prev\+\_\+v (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a9699210170686f652178211b4ce991f8}\label{classDCEL_a9699210170686f652178211b4ce991f8}} 
+\index{DCEL@{DCEL}!print@{print}}
+\index{print@{print}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void DCEL\+::print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a59185b6194533b526a177ed46293002b}\label{classDCEL_a59185b6194533b526a177ed46293002b}} 
+\index{DCEL@{DCEL}!printFromVertex@{printFromVertex}}
+\index{printFromVertex@{printFromVertex}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{printFromVertex()}{printFromVertex()}}
+{\footnotesize\ttfamily void DCEL\+::print\+From\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDCEL_a26d15abaecce5fe0d20c73b9f5ba52bf}\label{classDCEL_a26d15abaecce5fe0d20c73b9f5ba52bf}} 
+\index{DCEL@{DCEL}!remove\_vertex@{remove\_vertex}}
+\index{remove\_vertex@{remove\_vertex}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{remove\_vertex()}{remove\_vertex()}}
+{\footnotesize\ttfamily void DCEL\+::remove\+\_\+vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classDCEL_a0dfce903b2956a78c6aa143a2226365f}\label{classDCEL_a0dfce903b2956a78c6aa143a2226365f}} 
+\index{DCEL@{DCEL}!faces@{faces}}
+\index{faces@{faces}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{faces}{faces}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{structFace}{Face}} $\ast$$>$ DCEL\+::faces}
+
+\mbox{\Hypertarget{classDCEL_ab94ff526bfd8ac8a3fe8312d5c09d483}\label{classDCEL_ab94ff526bfd8ac8a3fe8312d5c09d483}} 
+\index{DCEL@{DCEL}!half\_edges@{half\_edges}}
+\index{half\_edges@{half\_edges}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{half\_edges}{half\_edges}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{structHalfEdge}{Half\+Edge}} $\ast$$>$ DCEL\+::half\+\_\+edges}
+
+\mbox{\Hypertarget{classDCEL_a6339be2488749b653dc02bab4c1e5655}\label{classDCEL_a6339be2488749b653dc02bab4c1e5655}} 
+\index{DCEL@{DCEL}!vertices@{vertices}}
+\index{vertices@{vertices}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{structVertex}{Vertex}} $\ast$$>$ DCEL\+::vertices}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+new/\mbox{\hyperlink{dcel_8hpp}{dcel.\+hpp}}\end{DoxyCompactItemize}

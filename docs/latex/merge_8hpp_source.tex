@@ -1,0 +1,47 @@
+\hypertarget{merge_8hpp_source}{}\doxysection{merge.\+hpp}
+\label{merge_8hpp_source}\index{new/merge.hpp@{new/merge.hpp}}
+\mbox{\hyperlink{merge_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MERGE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MERGE\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dcel_8hpp}{dcel.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <bits/stdc++.h>}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structDiagonal}{Diagonal}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \mbox{\hyperlink{structVertex}{Vertex}}\ *\mbox{\hyperlink{structDiagonal_a07124e57b0eb74171a082b758eb1ca81}{vs}},\ *\mbox{\hyperlink{structDiagonal_a5a5d137c76938bac495ad0d2c4cdb237}{vt}};}
+\DoxyCodeLine{00011\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structDiagonal_a3c5ca978a6cfd6c31f5f51c5b409277c}{vs\_index}},\ \mbox{\hyperlink{structDiagonal_abed526413d81d8694cb09913a649fec6}{vt\_index}};}
+\DoxyCodeLine{00012\ \ \ \mbox{\hyperlink{structDiagonal_a37efc3b479a55a0545b81599d49bc837}{Diagonal}}(\mbox{\hyperlink{structVertex}{Vertex}}\ *\mbox{\hyperlink{structDiagonal_a07124e57b0eb74171a082b758eb1ca81}{vs}},\ \mbox{\hyperlink{structVertex}{Vertex}}\ *\mbox{\hyperlink{structDiagonal_a5a5d137c76938bac495ad0d2c4cdb237}{vt}})}
+\DoxyCodeLine{00013\ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ this-\/>vs\ =\ \mbox{\hyperlink{structDiagonal_a07124e57b0eb74171a082b758eb1ca81}{vs}};}
+\DoxyCodeLine{00015\ \ \ \ \ this-\/>vt\ =\ \mbox{\hyperlink{structDiagonal_a5a5d137c76938bac495ad0d2c4cdb237}{vt}};}
+\DoxyCodeLine{00016\ \ \ \}}
+\DoxyCodeLine{00017\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structDiagonal_abd9e55048686be9a0c772df26fc942d9}{print}}()}
+\DoxyCodeLine{00018\ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Diagonal:\ "{}};}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{structDiagonal_a07124e57b0eb74171a082b758eb1ca81}{vs}}-\/>\mbox{\hyperlink{structVertex_abc2531c8f9b2eed32478f4fba4603e88}{print}}();}
+\DoxyCodeLine{00021\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/>\ "{}};}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{structDiagonal_a5a5d137c76938bac495ad0d2c4cdb237}{vt}}-\/>\mbox{\hyperlink{structVertex_abc2531c8f9b2eed32478f4fba4603e88}{print}}();}
+\DoxyCodeLine{00023\ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00024\ \ \ \}}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{inline}\ vector<Vertex\ *>\ \mbox{\hyperlink{merge_8hpp_a24fbbe5dcd72b6acbffff697cee9a371}{original\_vertices}};}
+\DoxyCodeLine{00028\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classDCEL}{DCEL}}\ \mbox{\hyperlink{merge_8hpp_a569d7a30bec8f30ff357cd05e11875c8}{orig\_dcel}};}
+\DoxyCodeLine{00030\ \textcolor{keyword}{inline}\ vector<Diagonal\ *>\ \mbox{\hyperlink{merge_8hpp_a4d118269486abfa19d3231142a879bc5}{LLE}};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{inline}\ vector<DCEL\ *>\ \mbox{\hyperlink{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}{polygons}};}
+\DoxyCodeLine{00032\ \textcolor{keyword}{inline}\ vector<Diagonal\ *>\ \mbox{\hyperlink{merge_8hpp_aef37ba928efb9251e3b711e444bc6bb8}{lastPolygonDiagonals}};}
+\DoxyCodeLine{00033\ \textcolor{keyword}{inline}\ vector<bool>\ \mbox{\hyperlink{merge_8hpp_a97d689ea49e2a15661d4789ea2a299ff}{LDP}};\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{inline}\ vector<int>\ \mbox{\hyperlink{merge_8hpp_abe9fc9c819d6d857381c6801d8baee80}{LUP}};\ \ }
+\DoxyCodeLine{00039\ vector<pair<int,\ Vertex\ *>>\ \mbox{\hyperlink{merge_8hpp_ae6ee7ac37d892fdeb75763efbf0b329e}{LP}}(\mbox{\hyperlink{structVertex}{Vertex}}\ *v);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ vector<Vertex\ *>\ \mbox{\hyperlink{merge_8hpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}{subtract}}(vector<Vertex\ *>\ a,\ vector<Vertex\ *>\ b);}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{merge_8hpp_a8903cd9c5f70a66c698d423cb7d51a0b}{find\_polygon\_u\_vs\_for\_vt}}(\mbox{\hyperlink{structVertex}{Vertex}}\ *vt,\ \mbox{\hyperlink{structVertex}{Vertex}}\ *vs);}
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{merge_8hpp_ae87467527b21e31f9e722cd2f131b03a}{initMerge}}(vector<vector<Vertex\ *>>\ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}},\ vector<Vertex\ *>\ original\_v,\ vector<vector<Vertex\ *>>\ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{lastPolygonWasConstructed}});}
+\DoxyCodeLine{00044\ vector<DCEL\ *>\ \mbox{\hyperlink{merge_8hpp_a040674d822fa35e828944a0d16d7c2c0}{merge}}(vector<vector<Vertex\ *>>\ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}},\ vector<Vertex\ *>\ original\_v,\ vector<vector<Vertex\ *>>\ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{lastPolygonWasConstructed}});}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{merge_8hpp_aa29e1edd25a27d289771a3da9cabe971}{testMerge}}(vector<vector<Vertex\ *>>\ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}},\ vector<Vertex\ *>\ original\_v,\ vector<vector<Vertex\ *>>\ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{lastPolygonWasConstructed}});}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

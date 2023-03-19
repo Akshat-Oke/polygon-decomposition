@@ -1,0 +1,269 @@
+\hypertarget{main_8cpp}{}\doxysection{new/main.cpp File Reference}
+\label{main_8cpp}\index{new/main.cpp@{new/main.cpp}}
+
+
+Decomposes a polygon into convex polygons.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$bits/stdc++.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}dcel.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}merge.\+hpp\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structRectangle}{Rectangle}}
+\begin{DoxyCompactList}\small\item\em A reactangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_afd1c5bd677bd7d86de9eb4384751fba7}{decompose}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ vertices)
+\begin{DoxyCompactList}\small\item\em Decompose a polygon into convex polygons. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{main_8cpp_a7cb1d70a4abdd82bdcd693d882316dc8}{next\+\_\+v}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ vertices, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Get next vertex in order from the vector. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_a0065ebbcb669d06afe0b811ca59e844e}{read\+\_\+vertices}} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Reads vertices from a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a0e47132e10258a2439a971a5ad50ebc4}{colinear}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ polygon)
+\begin{DoxyCompactList}\small\item\em Checks if vertices are colinear. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_ae90b99a8d60840c42396033a3969438f}{rotate\+\_\+forward}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ v)
+\begin{DoxyCompactList}\small\item\em Rotates a vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}{write\+Polygons}} (vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}{polygons}})
+\item 
+void \mbox{\hyperlink{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}{write\+Decomposition}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}})
+\begin{DoxyCompactList}\small\item\em Writes the decomposition to a file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}{subtract}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ a, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ b)
+\begin{DoxyCompactList}\small\item\em Subtract two vectors. Preserves the order of the first vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ae963bebd67e714ae80e89a88f1345ec7}{print}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ v)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}
+\begin{DoxyCompactList}\small\item\em Final decomposition. \end{DoxyCompactList}\item 
+vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}}
+\begin{DoxyCompactList}\small\item\em Diagonals of the decomposition. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{last\+Polygon\+Was\+Constructed}} = false
+\begin{DoxyCompactList}\small\item\em Polygon constructed from only diagonals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Decomposes a polygon into convex polygons. 
+
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/03-\/19
+\end{DoxyDate}
+This has the main decomposition algorithm. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a0e47132e10258a2439a971a5ad50ebc4}\label{main_8cpp_a0e47132e10258a2439a971a5ad50ebc4}} 
+\index{main.cpp@{main.cpp}!colinear@{colinear}}
+\index{colinear@{colinear}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{colinear()}{colinear()}}
+{\footnotesize\ttfamily bool colinear (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{polygon }\end{DoxyParamCaption})}
+
+
+
+Checks if vertices are colinear. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em polygon} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If vertices are colinear 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_afd1c5bd677bd7d86de9eb4384751fba7}\label{main_8cpp_afd1c5bd677bd7d86de9eb4384751fba7}} 
+\index{main.cpp@{main.cpp}!decompose@{decompose}}
+\index{decompose@{decompose}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{decompose()}{decompose()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ decompose (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{vertices }\end{DoxyParamCaption})}
+
+
+
+Decompose a polygon into convex polygons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Vertices in clockwise order \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Vertex $\ast$$>$ 
+\end{DoxyReturn}
+v(1) = Last\mbox{[}L\mbox{]}
+
+v(2) = Next\mbox{[}P, v(1)\mbox{]}
+
+L = \{v(1), v(2)\}
+
+i = 2
+
+v(i+1) = Next\mbox{[}P, v(i)\mbox{]}
+
+L = L + \{v(i+1)\}
+
+i = i + 1
+
+v(i+1) = Next\mbox{[}P, v(i)\mbox{]}
+
+P = P -\/ L
+
+v = First(\+LPVS)
+
+LPVS = LPVS -\/ \{v\}\mbox{\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a7cb1d70a4abdd82bdcd693d882316dc8}\label{main_8cpp_a7cb1d70a4abdd82bdcd693d882316dc8}} 
+\index{main.cpp@{main.cpp}!next\_v@{next\_v}}
+\index{next\_v@{next\_v}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{next\_v()}{next\_v()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ next\+\_\+v (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{vertices,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})}
+
+
+
+Get next vertex in order from the vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Vertices in clockwise order \\
+\hline
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vertex$\ast$ Next in order to v 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ae963bebd67e714ae80e89a88f1345ec7}\label{main_8cpp_ae963bebd67e714ae80e89a88f1345ec7}} 
+\index{main.cpp@{main.cpp}!print@{print}}
+\index{print@{print}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void print (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a0065ebbcb669d06afe0b811ca59e844e}\label{main_8cpp_a0065ebbcb669d06afe0b811ca59e844e}} 
+\index{main.cpp@{main.cpp}!read\_vertices@{read\_vertices}}
+\index{read\_vertices@{read\_vertices}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{read\_vertices()}{read\_vertices()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ read\+\_\+vertices (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads vertices from a file. 
+
+The first line of the file should contain the number of vertices Following lines should contain the x and y coordinates of the vertices, separated by a space.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Filename to read from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Vertex $\ast$$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ae90b99a8d60840c42396033a3969438f}\label{main_8cpp_ae90b99a8d60840c42396033a3969438f}} 
+\index{main.cpp@{main.cpp}!rotate\_forward@{rotate\_forward}}
+\index{rotate\_forward@{rotate\_forward}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{rotate\_forward()}{rotate\_forward()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ rotate\+\_\+forward (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{v }\end{DoxyParamCaption})}
+
+
+
+Rotates a vector. 
+
+\mbox{[}1,2,3\mbox{]} will be \mbox{[}2,3,1\mbox{]}
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Vertex $\ast$$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}\label{main_8cpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}} 
+\index{main.cpp@{main.cpp}!subtract@{subtract}}
+\index{subtract@{subtract}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{subtract()}{subtract()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ subtract (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{a,  }\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{b }\end{DoxyParamCaption})}
+
+
+
+Subtract two vectors. Preserves the order of the first vector. 
+
+Finds the elements of the first vector that are not in the second vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Vertex $\ast$$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}\label{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}} 
+\index{main.cpp@{main.cpp}!writeDecomposition@{writeDecomposition}}
+\index{writeDecomposition@{writeDecomposition}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{writeDecomposition()}{writeDecomposition()}}
+{\footnotesize\ttfamily void write\+Decomposition (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{decomposition }\end{DoxyParamCaption})}
+
+
+
+Writes the decomposition to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decomposition} & Vector of polygons as a vector of vertices \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}\label{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}} 
+\index{main.cpp@{main.cpp}!writePolygons@{writePolygons}}
+\index{writePolygons@{writePolygons}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{writePolygons()}{writePolygons()}}
+{\footnotesize\ttfamily void write\+Polygons (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$}]{polygons }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}\label{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}} 
+\index{main.cpp@{main.cpp}!decomposition@{decomposition}}
+\index{decomposition@{decomposition}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{decomposition}{decomposition}}
+{\footnotesize\ttfamily vector$<$vector$<$\mbox{\hyperlink{structVertex}{Vertex}} $\ast$$>$ $>$ decomposition}
+
+
+
+Final decomposition. 
+
+\mbox{\Hypertarget{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}\label{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}} 
+\index{main.cpp@{main.cpp}!diagonals@{diagonals}}
+\index{diagonals@{diagonals}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{diagonals}{diagonals}}
+{\footnotesize\ttfamily vector$<$vector$<$\mbox{\hyperlink{structVertex}{Vertex}} $\ast$$>$ $>$ diagonals}
+
+
+
+Diagonals of the decomposition. 
+
+\mbox{\Hypertarget{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}\label{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}} 
+\index{main.cpp@{main.cpp}!lastPolygonWasConstructed@{lastPolygonWasConstructed}}
+\index{lastPolygonWasConstructed@{lastPolygonWasConstructed}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{lastPolygonWasConstructed}{lastPolygonWasConstructed}}
+{\footnotesize\ttfamily bool last\+Polygon\+Was\+Constructed = false}
+
+
+
+Polygon constructed from only diagonals. 
+
+The decompisition may include an \+\_\+\char`\"{}inside\char`\"{}\+\_\+ polygon, which has none of the original polygon sides; but is constructed from diagonals. This polygon will always be the last in \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}} 
