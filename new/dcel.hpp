@@ -11,9 +11,14 @@ double cross_product(Vertex *a, Vertex *b, Vertex *c);
 bool ang_leq_180(Vertex *a, Vertex *b, Vertex *c);
 bool v_is_notch(Vertex *a, Vertex *b, Vertex *c);
 Vertex *next_v(vector<Vertex *> vertices, Vertex *v);
+
+/**
+ * @brief Vertex of the polygon.
+ */
 struct Vertex
 {
   double x, y;
+  /*! The half edge that has this vertex as the destination*/
   HalfEdge *incident_edge;
   Vertex(double x, double y)
   {
@@ -39,6 +44,12 @@ struct Face
 {
   HalfEdge *incident_edge;
 };
+/**
+ * @brief A directed edge.
+ * 
+ * Around a 
+ * 
+ */
 struct HalfEdge
 {
   Vertex *origin;

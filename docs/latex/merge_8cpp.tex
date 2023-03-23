@@ -1,5 +1,5 @@
-\hypertarget{merge_8cpp}{}\doxysection{new/merge.cpp File Reference}
-\label{merge_8cpp}\index{new/merge.cpp@{new/merge.cpp}}
+\hypertarget{merge_8cpp}{}\doxysection{src/merge.cpp File Reference}
+\label{merge_8cpp}\index{src/merge.cpp@{src/merge.cpp}}
 {\ttfamily \#include \char`\"{}dcel.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}merge.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
@@ -14,7 +14,7 @@ void \mbox{\hyperlink{merge_8cpp_a70faa5c1d322ed8ef6e5d3070f79997e}{print\+\_\+v
 vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8cpp_a040674d822fa35e828944a0d16d7c2c0}{merge}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ original\+\_\+v, vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}}, bool \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{last\+Polygon\+Was\+Constructed}})
 \begin{DoxyCompactList}\small\item\em Tries to merge polygons in the decomposition. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{merge_8cpp_a8903cd9c5f70a66c698d423cb7d51a0b}{find\+\_\+polygon\+\_\+u\+\_\+vs\+\_\+for\+\_\+vt}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$vt, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$vs)
-\item 
+\begin{DoxyCompactList}\small\item\em Find the polygon u which contains the diagonal (vt, vs) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{merge_8cpp_ae87467527b21e31f9e722cd2f131b03a}{init\+Merge}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ original\+\_\+v, vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_a6ec63605a1360efe18355f3ccbf2472c}{diagonals}}, bool \mbox{\hyperlink{main_8cpp_ac9aa12c9954299dd591ff9c891026fe0}{last\+Polygon\+Was\+Constructed}})
 \begin{DoxyCompactList}\small\item\em Sets up the global variables for the merge algorithm. \end{DoxyCompactList}\item 
 vector$<$ pair$<$ int, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{merge_8cpp_ae6ee7ac37d892fdeb75763efbf0b329e}{LP}} (\mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
@@ -31,6 +31,22 @@ Merge functions. This contains the implementation of the merging algorithm.
 \doxysubsubsection{\texorpdfstring{find\_polygon\_u\_vs\_for\_vt()}{find\_polygon\_u\_vs\_for\_vt()}}
 {\footnotesize\ttfamily int find\+\_\+polygon\+\_\+u\+\_\+vs\+\_\+for\+\_\+vt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{vt,  }\item[{\mbox{\hyperlink{structVertex}{Vertex}} $\ast$}]{vs }\end{DoxyParamCaption})}
 
+
+
+Find the polygon u which contains the diagonal (vt, vs) 
+
+Find in LP(vt) the only pair (u, vs) containing vs. vs is the next vertex of vt in the polygon u.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vt} & Start vertex of diagonal \\
+\hline
+{\em vs} & End vertex of diagonal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The index of the polygon 
+\end{DoxyReturn}
 \mbox{\Hypertarget{merge_8cpp_ae87467527b21e31f9e722cd2f131b03a}\label{merge_8cpp_ae87467527b21e31f9e722cd2f131b03a}} 
 \index{merge.cpp@{merge.cpp}!initMerge@{initMerge}}
 \index{initMerge@{initMerge}!merge.cpp@{merge.cpp}}
@@ -43,13 +59,13 @@ Sets up the global variables for the merge algorithm.
 
 
 \begin{DoxyParams}{Parameters}
-{\em decomposition} & \\
+{\em decomposition} & (Unmerged) decomposition \\
 \hline
-{\em original\+\_\+v} & \\
+{\em original\+\_\+v} & Original vertices in the non-\/convex polygon \\
 \hline
-{\em diagonals} & \\
+{\em diagonals} & Diagonals of the decomposition \\
 \hline
-{\em last\+Polygon\+Was\+Constructed} & \\
+{\em last\+Polygon\+Was\+Constructed} & Whether the last polygon was constructed only from the diagonals \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{merge_8cpp_ae6ee7ac37d892fdeb75763efbf0b329e}\label{merge_8cpp_ae6ee7ac37d892fdeb75763efbf0b329e}} 

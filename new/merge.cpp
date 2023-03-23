@@ -15,15 +15,15 @@ void testMerge(vector<vector<Vertex *>> decomposition, vector<Vertex *> original
   for (int i = 0; i < original_vertices.size(); i++)
   {
     auto v = original_vertices[i];
-    cout << "is_notch(" << v->x << ", " << v->y << "): " << orig_dcel.is_notch(v) << endl;
+    // cout << "is_notch(" << v->x << ", " << v->y << "): " << orig_dcel.is_notch(v) << endl;
   }
   // after initMerge
   for (int i = 0; i < LLE.size(); i++)
   {
     auto p = polygons[i];
-    cout << "Polygon " << i << endl;
-    LLE[i]->print();
-    p->print();
+    // cout << "Polygon " << i << endl;
+    // LLE[i]->print();
+    // p->print();
   }
   cout << "LP(v)" << endl;
   for (int i = 0; i < original_v.size(); i++)

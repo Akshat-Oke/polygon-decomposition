@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from generate import *
 import sys
 
-def generate_draw_write(irreg, spike, vert_count):
+def generate_draw_write(irreg, spike, vert_count, filename):
     vertices = generate_polygon(center=(250, 250),
                                 avg_radius=100,
                                 irregularity=irreg,
@@ -19,12 +19,12 @@ def generate_draw_write(irreg, spike, vert_count):
     end_x = [x[0], x[len(vertices)-1]]
     end_y = [y[0], y[len(vertices)-1]]
 
-    plt.plot(x, y, color='black')
-    plt.plot(end_x, end_y, color='black')
-    plt.show()
+    # plt.plot(x, y, color='black')
+    # plt.plot(end_x, end_y, color='black')
+    # plt.show()
 
     vertices.reverse()
-    with open('input_py.txt', 'w') as file:
+    with open(filename, 'w') as file:
         file.write(str(len(vertices)) + '\n')
         for element in vertices:
             a, b = element
@@ -35,7 +35,7 @@ def read_draw():
     y = []
     count = -1
 
-    with open('input_py.txt','r') as file:
+    with open('input_geo.txt','r') as file:
         for line in file:
             if count == -1:
                 count += 1
@@ -55,7 +55,34 @@ def read_draw():
     plt.plot(end_x, end_y, color='black')
     plt.show()
 
-if sys.argv[1] == 'gen':
-	generate_draw_write(0.5, 0.3, int(sys.argv[2]))
+def draw_decomposition(filename):
+    file = open(filename, "r")
+    lines = file.readlines()
+    file.close()
+    total_polygons = int(lines[0])
+    cur_line = 1
+    for i in range(total_polygons):
+        num_points = int(lines[cur_line])
+        cur_line += 1
+        x = []
+        y = []
+        for j in range(num_points):
+            x.append(float(lines[cur_line].split()[0]))
+            y.append(float(lines[cur_line].split()[1]))
+            cur_line += 1
+        end_x = [x[0], x[len(x)-1]]
+        end_y = [y[0], y[len(y)-1]]
+        plt.plot(x, y, color='black')
+        plt.plot(end_x, end_y, color='black')
+    plt.show()
+
+if sys.argv[1] == 'decomp':
+    draw_decomposition(sys.argv[2])
+elif sys.argv[1] == 'gen':
+	generate_draw_write(0.5, 0.3, int(sys.argv[2]), "input_gen.txt")
 elif sys.argv[1] == 'draw':
 	read_draw()
+elif sys.argv[1] == 'gen_dir':
+     for i in range(1000, int(sys.argv[2]), 5):
+          generate_draw_write(0.5, 0.3, i + 10, "test10/"+str(i) + ".txt")        
+

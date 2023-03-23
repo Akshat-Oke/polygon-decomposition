@@ -26,11 +26,12 @@ struct Diagonal
 
 inline vector<Vertex *> original_vertices;
 inline DCEL orig_dcel;
+//! Diagonals of the partition(decomposition)
 inline vector<Diagonal *> LLE;
 inline vector<DCEL *> polygons;
 inline vector<Diagonal *> lastPolygonDiagonals;
-inline vector<bool> LDP; // whether polygon is definite polygon
-inline vector<int> LUP;  // LUP[i] = j means that polygon i is part of polygon j
+inline vector<bool> LDP; /*!< whether polygon is definite polygon */
+inline vector<int> LUP;  /*!< LUP[i] = j means that polygon i is part of polygon j */
 
 /// @brief Find the next vertex in all polygons
 /// @param v

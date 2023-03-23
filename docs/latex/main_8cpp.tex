@@ -1,36 +1,50 @@
-\hypertarget{main_8cpp}{}\doxysection{new/main.cpp File Reference}
-\label{main_8cpp}\index{new/main.cpp@{new/main.cpp}}
+\hypertarget{main_8cpp}{}\doxysection{src/main.cpp File Reference}
+\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
 
 
 Decomposes a polygon into convex polygons.  
 
 
+{\ttfamily \#include $<$chrono$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$bits/stdc++.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
 {\ttfamily \#include \char`\"{}dcel.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}merge.\+hpp\char`\"{}}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structRectangle}{Rectangle}}
-\begin{DoxyCompactList}\small\item\em A reactangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_afd1c5bd677bd7d86de9eb4384751fba7}{decompose}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ vertices)
-\begin{DoxyCompactList}\small\item\em Decompose a polygon into convex polygons. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Chops off a convex polygon from the given one. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ \mbox{\hyperlink{main_8cpp_a7cb1d70a4abdd82bdcd693d882316dc8}{next\+\_\+v}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ vertices, \mbox{\hyperlink{structVertex}{Vertex}} $\ast$v)
 \begin{DoxyCompactList}\small\item\em Get next vertex in order from the vector. \end{DoxyCompactList}\item 
 vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_a0065ebbcb669d06afe0b811ca59e844e}{read\+\_\+vertices}} (char $\ast$filename)
 \begin{DoxyCompactList}\small\item\em Reads vertices from a file. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{main_8cpp_a0e47132e10258a2439a971a5ad50ebc4}{colinear}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ polygon)
 \begin{DoxyCompactList}\small\item\em Checks if vertices are colinear. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_ae398e67934a3f783b43cb2d9bd81e759}{number\+\_\+of\+\_\+lines}} (char $\ast$filename)
+\item 
+void \mbox{\hyperlink{main_8cpp_a4da6bcd803ec408a014e245119d59c21}{test\+DCEL}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ LPVS)
+\item 
 vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_ae90b99a8d60840c42396033a3969438f}{rotate\+\_\+forward}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ v)
 \begin{DoxyCompactList}\small\item\em Rotates a vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}{write\+Polygons}} (vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}{polygons}})
 \item 
 void \mbox{\hyperlink{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}{write\+Decomposition}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}})
 \begin{DoxyCompactList}\small\item\em Writes the decomposition to a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a677adf3294c791e79df51fd1c81c9e69}{run\+\_\+for\+\_\+testcase}} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Decompose a polygon in the file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a40a266327cb4179a144117189b88b0dd}{run\+\_\+and\+\_\+time\+\_\+for\+\_\+directory}} (char $\ast$directory)
+\begin{DoxyCompactList}\small\item\em Run for all files ending with .txt in this directory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ae41840c1d40fc87fc8987ec5467c3401}{run\+\_\+and\+\_\+time\+\_\+one\+\_\+file}} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Run for one file. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
 \item 
 vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}{subtract}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ a, vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ b)
@@ -77,8 +91,6 @@ Checks if vertices are colinear.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 true If vertices are colinear 
-
-false 
 \end{DoxyReturn}
 \mbox{\Hypertarget{main_8cpp_afd1c5bd677bd7d86de9eb4384751fba7}\label{main_8cpp_afd1c5bd677bd7d86de9eb4384751fba7}} 
 \index{main.cpp@{main.cpp}!decompose@{decompose}}
@@ -88,11 +100,13 @@ false
 
 
 
-Decompose a polygon into convex polygons. 
+Chops off a convex polygon from the given one. 
+
+Uses a clockwise sweep to find a convex polygon If no convex polygon starting from the first vertex in {\ttfamily vertices} is found, this returns two points (the first and second)
 
 
 \begin{DoxyParams}{Parameters}
-{\em vertices} & Vertices in clockwise order \\
+{\em vertices} & \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -144,6 +158,12 @@ Get next vertex in order from the vector.
 \begin{DoxyReturn}{Returns}
 Vertex$\ast$ Next in order to v 
 \end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ae398e67934a3f783b43cb2d9bd81e759}\label{main_8cpp_ae398e67934a3f783b43cb2d9bd81e759}} 
+\index{main.cpp@{main.cpp}!number\_of\_lines@{number\_of\_lines}}
+\index{number\_of\_lines@{number\_of\_lines}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{number\_of\_lines()}{number\_of\_lines()}}
+{\footnotesize\ttfamily int number\+\_\+of\+\_\+lines (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{main_8cpp_ae963bebd67e714ae80e89a88f1345ec7}\label{main_8cpp_ae963bebd67e714ae80e89a88f1345ec7}} 
 \index{main.cpp@{main.cpp}!print@{print}}
 \index{print@{print}!main.cpp@{main.cpp}}
@@ -190,6 +210,57 @@ Rotates a vector.
 \begin{DoxyReturn}{Returns}
 vector$<$\+Vertex $\ast$$>$ 
 \end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a40a266327cb4179a144117189b88b0dd}\label{main_8cpp_a40a266327cb4179a144117189b88b0dd}} 
+\index{main.cpp@{main.cpp}!run\_and\_time\_for\_directory@{run\_and\_time\_for\_directory}}
+\index{run\_and\_time\_for\_directory@{run\_and\_time\_for\_directory}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{run\_and\_time\_for\_directory()}{run\_and\_time\_for\_directory()}}
+{\footnotesize\ttfamily void run\+\_\+and\+\_\+time\+\_\+for\+\_\+directory (\begin{DoxyParamCaption}\item[{char $\ast$}]{directory }\end{DoxyParamCaption})}
+
+
+
+Run for all files ending with .txt in this directory. 
+
+Writes the \mbox{[}num\+Points, time\mbox{]} for each testcase to timelog.\+txt Times are written in microseconds.
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory} & Directory with txt files of polygon testcases \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_ae41840c1d40fc87fc8987ec5467c3401}\label{main_8cpp_ae41840c1d40fc87fc8987ec5467c3401}} 
+\index{main.cpp@{main.cpp}!run\_and\_time\_one\_file@{run\_and\_time\_one\_file}}
+\index{run\_and\_time\_one\_file@{run\_and\_time\_one\_file}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{run\_and\_time\_one\_file()}{run\_and\_time\_one\_file()}}
+{\footnotesize\ttfamily void run\+\_\+and\+\_\+time\+\_\+one\+\_\+file (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Run for one file. 
+
+Writes the time taken for each testcase to timelog.\+txt
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a677adf3294c791e79df51fd1c81c9e69}\label{main_8cpp_a677adf3294c791e79df51fd1c81c9e69}} 
+\index{main.cpp@{main.cpp}!run\_for\_testcase@{run\_for\_testcase}}
+\index{run\_for\_testcase@{run\_for\_testcase}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{run\_for\_testcase()}{run\_for\_testcase()}}
+{\footnotesize\ttfamily void run\+\_\+for\+\_\+testcase (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Decompose a polygon in the file. 
+
+Decomposes and merges the decomposition for the testcase in the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The polygon testcase file \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{main_8cpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}\label{main_8cpp_ac3c54c5f8d35dbf15f4dd9e785a5b3e8}} 
 \index{main.cpp@{main.cpp}!subtract@{subtract}}
 \index{subtract@{subtract}!main.cpp@{main.cpp}}
@@ -212,6 +283,12 @@ Finds the elements of the first vector that are not in the second vector.
 \begin{DoxyReturn}{Returns}
 vector$<$\+Vertex $\ast$$>$ 
 \end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a4da6bcd803ec408a014e245119d59c21}\label{main_8cpp_a4da6bcd803ec408a014e245119d59c21}} 
+\index{main.cpp@{main.cpp}!testDCEL@{testDCEL}}
+\index{testDCEL@{testDCEL}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testDCEL()}{testDCEL()}}
+{\footnotesize\ttfamily void test\+DCEL (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{LPVS }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}\label{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}} 
 \index{main.cpp@{main.cpp}!writeDecomposition@{writeDecomposition}}
 \index{writeDecomposition@{writeDecomposition}!main.cpp@{main.cpp}}

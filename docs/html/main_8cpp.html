@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Decompositon of Polygon: new/main.cpp File Reference</title>
+<title>Decompositon of Polygon: src/main.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_e6266a6d2478377be81817c9391c2cc6.html">new</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -83,21 +83,24 @@ $(function() {
 
 <p>Decomposes a polygon into convex polygons.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;bits/stdc++.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
 <code>#include &quot;<a class="el" href="dcel_8hpp_source.html">dcel.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="merge_8hpp_source.html">merge.hpp</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRectangle.html">Rectangle</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A reactangle.  <a href="structRectangle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:afd1c5bd677bd7d86de9eb4384751fba7"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#afd1c5bd677bd7d86de9eb4384751fba7">decompose</a> (vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; vertices)</td></tr>
-<tr class="memdesc:afd1c5bd677bd7d86de9eb4384751fba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decompose a polygon into convex polygons.  <br /></td></tr>
+<tr class="memdesc:afd1c5bd677bd7d86de9eb4384751fba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chops off a convex polygon from the given one.  <br /></td></tr>
 <tr class="separator:afd1c5bd677bd7d86de9eb4384751fba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cb1d70a4abdd82bdcd693d882316dc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a7cb1d70a4abdd82bdcd693d882316dc8">next_v</a> (vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; vertices, <a class="el" href="structVertex.html">Vertex</a> *v)</td></tr>
 <tr class="memdesc:a7cb1d70a4abdd82bdcd693d882316dc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get next vertex in order from the vector.  <br /></td></tr>
@@ -108,6 +111,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a0e47132e10258a2439a971a5ad50ebc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0e47132e10258a2439a971a5ad50ebc4">colinear</a> (vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; polygon)</td></tr>
 <tr class="memdesc:a0e47132e10258a2439a971a5ad50ebc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if vertices are colinear.  <br /></td></tr>
 <tr class="separator:a0e47132e10258a2439a971a5ad50ebc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae398e67934a3f783b43cb2d9bd81e759"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae398e67934a3f783b43cb2d9bd81e759">number_of_lines</a> (char *filename)</td></tr>
+<tr class="separator:ae398e67934a3f783b43cb2d9bd81e759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da6bcd803ec408a014e245119d59c21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4da6bcd803ec408a014e245119d59c21">testDCEL</a> (vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; LPVS)</td></tr>
+<tr class="separator:a4da6bcd803ec408a014e245119d59c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90b99a8d60840c42396033a3969438f"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae90b99a8d60840c42396033a3969438f">rotate_forward</a> (vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; v)</td></tr>
 <tr class="memdesc:ae90b99a8d60840c42396033a3969438f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates a vector.  <br /></td></tr>
 <tr class="separator:ae90b99a8d60840c42396033a3969438f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +123,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ac68001e6a496d7b7ccce5f2b6f4ef34c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac68001e6a496d7b7ccce5f2b6f4ef34c">writeDecomposition</a> (vector&lt; vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; &gt; <a class="el" href="main_8cpp.html#adbbbd164dde5c86f92908b07c67161c8">decomposition</a>)</td></tr>
 <tr class="memdesc:ac68001e6a496d7b7ccce5f2b6f4ef34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the decomposition to a file.  <br /></td></tr>
 <tr class="separator:ac68001e6a496d7b7ccce5f2b6f4ef34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a677adf3294c791e79df51fd1c81c9e69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a677adf3294c791e79df51fd1c81c9e69">run_for_testcase</a> (char *filename)</td></tr>
+<tr class="memdesc:a677adf3294c791e79df51fd1c81c9e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decompose a polygon in the file.  <br /></td></tr>
+<tr class="separator:a677adf3294c791e79df51fd1c81c9e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a266327cb4179a144117189b88b0dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a40a266327cb4179a144117189b88b0dd">run_and_time_for_directory</a> (char *directory)</td></tr>
+<tr class="memdesc:a40a266327cb4179a144117189b88b0dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run for all files ending with .txt in this directory.  <br /></td></tr>
+<tr class="separator:a40a266327cb4179a144117189b88b0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae41840c1d40fc87fc8987ec5467c3401"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae41840c1d40fc87fc8987ec5467c3401">run_and_time_one_file</a> (char *filename)</td></tr>
+<tr class="memdesc:ae41840c1d40fc87fc8987ec5467c3401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run for one file.  <br /></td></tr>
+<tr class="separator:ae41840c1d40fc87fc8987ec5467c3401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3c54c5f8d35dbf15f4dd9e785a5b3e8"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac3c54c5f8d35dbf15f4dd9e785a5b3e8">subtract</a> (vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; a, vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; b)</td></tr>
@@ -165,9 +181,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true If vertices are colinear </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true If vertices are colinear </dd></dl>
 
 </div>
 </div>
@@ -187,10 +201,11 @@ false </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Decompose a polygon into convex polygons. </p>
+<p>Chops off a convex polygon from the given one. </p>
+<p>Uses a clockwise sweep to find a convex polygon If no convex polygon starting from the first vertex in <code>vertices</code> is found, this returns two points (the first and second)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vertices</td><td>Vertices in clockwise order </td></tr>
+    <tr><td class="paramname">vertices</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -275,6 +290,24 @@ false </dd></dl>
 
 </div>
 </div>
+<a id="ae398e67934a3f783b43cb2d9bd81e759" name="ae398e67934a3f783b43cb2d9bd81e759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae398e67934a3f783b43cb2d9bd81e759">&#9670;&#160;</a></span>number_of_lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int number_of_lines </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae963bebd67e714ae80e89a88f1345ec7" name="ae963bebd67e714ae80e89a88f1345ec7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae963bebd67e714ae80e89a88f1345ec7">&#9670;&#160;</a></span>print()</h2>
 
@@ -349,6 +382,87 @@ false </dd></dl>
 
 </div>
 </div>
+<a id="a40a266327cb4179a144117189b88b0dd" name="a40a266327cb4179a144117189b88b0dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a266327cb4179a144117189b88b0dd">&#9670;&#160;</a></span>run_and_time_for_directory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_and_time_for_directory </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>directory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run for all files ending with .txt in this directory. </p>
+<p>Writes the [numPoints, time] for each testcase to timelog.txt Times are written in microseconds.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">directory</td><td>Directory with txt files of polygon testcases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae41840c1d40fc87fc8987ec5467c3401" name="ae41840c1d40fc87fc8987ec5467c3401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae41840c1d40fc87fc8987ec5467c3401">&#9670;&#160;</a></span>run_and_time_one_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_and_time_one_file </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run for one file. </p>
+<p>Writes the time taken for each testcase to timelog.txt</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a677adf3294c791e79df51fd1c81c9e69" name="a677adf3294c791e79df51fd1c81c9e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a677adf3294c791e79df51fd1c81c9e69">&#9670;&#160;</a></span>run_for_testcase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_for_testcase </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decompose a polygon in the file. </p>
+<p>Decomposes and merges the decomposition for the testcase in the file.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The polygon testcase file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac3c54c5f8d35dbf15f4dd9e785a5b3e8" name="ac3c54c5f8d35dbf15f4dd9e785a5b3e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac3c54c5f8d35dbf15f4dd9e785a5b3e8">&#9670;&#160;</a></span>subtract()</h2>
 
@@ -385,6 +499,24 @@ false </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vector&lt;Vertex *&gt; </dd></dl>
+
+</div>
+</div>
+<a id="a4da6bcd803ec408a014e245119d59c21" name="a4da6bcd803ec408a014e245119d59c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da6bcd803ec408a014e245119d59c21">&#9670;&#160;</a></span>testDCEL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testDCEL </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt;&#160;</td>
+          <td class="paramname"><em>LPVS</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

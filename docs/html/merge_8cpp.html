@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Decompositon of Polygon: new/merge.cpp File Reference</title>
+<title>Decompositon of Polygon: src/merge.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_e6266a6d2478377be81817c9391c2cc6.html">new</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -93,6 +93,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a040674d822fa35e828944a0d16d7c2c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to merge polygons in the decomposition.  <br /></td></tr>
 <tr class="separator:a040674d822fa35e828944a0d16d7c2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8903cd9c5f70a66c698d423cb7d51a0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="merge_8cpp.html#a8903cd9c5f70a66c698d423cb7d51a0b">find_polygon_u_vs_for_vt</a> (<a class="el" href="structVertex.html">Vertex</a> *vt, <a class="el" href="structVertex.html">Vertex</a> *vs)</td></tr>
+<tr class="memdesc:a8903cd9c5f70a66c698d423cb7d51a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the polygon u which contains the diagonal (vt, vs)  <br /></td></tr>
 <tr class="separator:a8903cd9c5f70a66c698d423cb7d51a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae87467527b21e31f9e722cd2f131b03a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="merge_8cpp.html#ae87467527b21e31f9e722cd2f131b03a">initMerge</a> (vector&lt; vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; &gt; <a class="el" href="main_8cpp.html#adbbbd164dde5c86f92908b07c67161c8">decomposition</a>, vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; original_v, vector&lt; vector&lt; <a class="el" href="structVertex.html">Vertex</a> * &gt; &gt; <a class="el" href="main_8cpp.html#a6ec63605a1360efe18355f3ccbf2472c">diagonals</a>, bool <a class="el" href="main_8cpp.html#ac9aa12c9954299dd591ff9c891026fe0">lastPolygonWasConstructed</a>)</td></tr>
 <tr class="memdesc:ae87467527b21e31f9e722cd2f131b03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the global variables for the merge algorithm.  <br /></td></tr>
@@ -129,6 +130,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Find the polygon u which contains the diagonal (vt, vs) </p>
+<p>Find in LP(vt) the only pair (u, vs) containing vs. vs is the next vertex of vt in the polygon u.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vt</td><td>Start vertex of diagonal </td></tr>
+    <tr><td class="paramname">vs</td><td>End vertex of diagonal </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int The index of the polygon </dd></dl>
 
 </div>
 </div>
@@ -173,10 +185,10 @@ Functions</h2></td></tr>
 <p>Sets up the global variables for the merge algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">decomposition</td><td></td></tr>
-    <tr><td class="paramname">original_v</td><td></td></tr>
-    <tr><td class="paramname">diagonals</td><td></td></tr>
-    <tr><td class="paramname">lastPolygonWasConstructed</td><td></td></tr>
+    <tr><td class="paramname">decomposition</td><td>(Unmerged) decomposition </td></tr>
+    <tr><td class="paramname">original_v</td><td>Original vertices in the non-convex polygon </td></tr>
+    <tr><td class="paramname">diagonals</td><td>Diagonals of the decomposition </td></tr>
+    <tr><td class="paramname">lastPolygonWasConstructed</td><td>Whether the last polygon was constructed only from the diagonals </td></tr>
   </table>
   </dd>
 </dl>

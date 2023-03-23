@@ -1,5 +1,18 @@
+/**
+ * @file main.cpp
+ * @brief Decomposes a polygon into convex polygons
+ * @version 0.1
+ * @date 2023-03-19
+ *
+ * This has the main decomposition algorithm.
+ *
+ */
+#include <chrono>
 #include <iostream>
 #include <bits/stdc++.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <cstdlib>
 #include "dcel.hpp"
 #include "merge.hpp"
 
@@ -10,9 +23,32 @@ Vertex *next_v(vector<Vertex *> vertices, Vertex *v);
 vector<Vertex *> read_vertices(char *filename);
 bool colinear(vector<Vertex *> polygon);
 
+/**
+ * @brief Final decomposition
+ */
 vector<vector<Vertex *>> decomposition;
+//! Diagonals of the decomposition
 vector<vector<Vertex *>> diagonals;
+//! Polygon constructed from only diagonals
+/*!
+ * The decompisition may include an _"inside"_ polygon,
+ * which has none of the original polygon sides; but is
+ * constructed from diagonals.
+ * This polygon will always be the last in #decomposition
+ */
 bool lastPolygonWasConstructed = false;
+
+int number_of_lines(char *filename)
+{
+  int number_of_lines = 0;
+  std::string line;
+  std::ifstream myfile(filename);
+
+  while (std::getline(myfile, line))
+    ++number_of_lines;
+  // std::cout << "Number of lines in text file: " << number_of_lines;
+  return number_of_lines;
+}
 
 void testDCEL(vector<Vertex *> LPVS)
 {
@@ -24,6 +60,14 @@ void testDCEL(vector<Vertex *> LPVS)
   //   (*min_y)->print();
   std::cout << colinear(LPVS);
 }
+/**
+ * @brief Rotates a vector
+ *
+ * [1,2,3] will be [2,3,1]
+ *
+ * @param v
+ * @return vector<Vertex *>
+ */
 vector<Vertex *> rotate_forward(vector<Vertex *> v)
 {
   vector<Vertex *> result;
@@ -37,7 +81,7 @@ vector<Vertex *> rotate_forward(vector<Vertex *> v)
 
 void writePolygons(vector<DCEL *> polygons)
 {
-  cout << "Open output.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
+  // cout << "Open output.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
   ofstream myfile;
   myfile.open("output.txt");
   myfile << polygons.size() << endl;
@@ -53,10 +97,14 @@ void writePolygons(vector<DCEL *> polygons)
   }
   myfile.close();
 }
-
+/**
+ * @brief Writes the decomposition to a file
+ *
+ * @param decomposition Vector of polygons as a vector of vertices
+ */
 void writeDecomposition(vector<vector<Vertex *>> decomposition)
 {
-  cout << "Open decomposition.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
+  // cout << "Open decomposition.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
   ofstream myfile;
   myfile.open("decomposition.txt");
   myfile << decomposition.size() << endl;
@@ -72,12 +120,21 @@ void writeDecomposition(vector<vector<Vertex *>> decomposition)
   }
   myfile.close();
 }
-int main(int argc, char *argv[])
+/**
+ * @brief Decompose a polygon in the file
+ *
+ * Decomposes and merges the decomposition for
+ * the testcase in the file.
+ *
+ * @param filename The polygon testcase file
+ */
+void run_for_testcase(char *filename)
 {
   decomposition.clear();
   vector<Vertex *> vertices;
-  vertices = read_vertices(argv[1]);
+  vertices = read_vertices(filename);
   auto vertices_copy = vertices;
+  // cout << "Starting decomposition\n";
   auto new_p_vertices = decompose(vertices);
   while (new_p_vertices.size() > 3)
   {
@@ -92,17 +149,102 @@ int main(int argc, char *argv[])
   }
   //   testDCEL(vertices);
   writeDecomposition(decomposition);
-  testMerge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
+  // testMerge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
   auto final_polygons = merge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
-  cout << "----Final merged polyons----\n";
-  for (auto p : final_polygons)
-  {
-    cout << "\n---Final polygon---\n";
-    p->print();
-  }
+  // auto final_polygons = decomposition;
+  // cout << "----Final merged polyons----\n";
+  // for (auto p : final_polygons)
+  // {
+  //   // cout << "\n---Final polygon---\n";
+  //   // p->print();
+  // }
   writePolygons(final_polygons);
 }
-
+/**
+ * @brief Run for all files ending with .txt in this directory
+ *
+ * Writes the [numPoints, time] for each testcase to timelog.txt
+ * Times are written in microseconds.
+ *
+ * @param directory Directory with txt files of polygon testcases
+ */
+void run_and_time_for_directory(char *directory)
+{
+  DIR *dir = opendir(directory);
+  ofstream timelogfile;
+  timelogfile.open("timelog.txt", ios::app);
+  struct dirent *ent;
+  while ((ent = readdir(dir)) != NULL)
+  {
+    if (ent->d_name[0] == '.')
+      continue;
+    char *filename = (char *)malloc(100);
+    strcpy(filename, directory);
+    strcat(filename, "/");
+    strcat(filename, ent->d_name);
+    // check if extension is .txt
+    if (filename[strlen(filename) - 1] != 't' || filename[strlen(filename) - 2] != 'x' || filename[strlen(filename) - 3] != 't' || filename[strlen(filename) - 4] != '.')
+      continue;
+    auto start = chrono::high_resolution_clock::now();
+    run_for_testcase(filename);
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+    ifstream file;
+    file.open(filename);
+    int n;
+    file >> n;
+    file.close();
+    timelogfile << n << " " << duration.count() << endl;
+  }
+  closedir(dir);
+  timelogfile.close();
+}
+/**
+ * @brief Run for one file
+ *
+ * Writes the time taken for each testcase to timelog.txt
+ *
+ * @param filename
+ */
+void run_and_time_one_file(char *filename)
+{
+  auto start = chrono::high_resolution_clock::now();
+  ofstream timelogfile;
+  timelogfile.open("timelog.txt", ios::app);
+  run_for_testcase(filename);
+  auto stop = chrono::high_resolution_clock::now();
+  auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+  timelogfile << duration.count() << endl;
+  timelogfile.close();
+}
+int main(int argc, char *argv[])
+{
+  if (argc < 2)
+  {
+    cout << "Please provide the input directory name as an argument\n";
+    return 1;
+  }
+  char *directory = argv[1];
+  DIR *dir;
+  if ((dir = opendir(directory)) != NULL)
+  {
+    cout << "Running for directory " << directory << endl;
+    run_and_time_for_directory(directory);
+  }
+  else
+  {
+    cout << "Running for file " << directory << endl;
+    run_and_time_one_file(directory);
+  }
+  cout << "Finished. See decomposition.txt for decomposition and output.txt for merged polygons.\n";
+  return 0;
+}
+/**
+ * @brief Checks if vertices are colinear
+ *
+ * @param polygon
+ * @return true If vertices are colinear
+ */
 bool colinear(vector<Vertex *> polygon)
 {
   int x_neq = 0, y_neq = 0;
@@ -140,7 +282,13 @@ bool colinear(vector<Vertex *> polygon)
 
   return true;
 }
-
+/**
+ * @brief Get next vertex in order from the vector
+ *
+ * @param vertices Vertices in clockwise order
+ * @param v
+ * @return Vertex* Next in order to v
+ */
 Vertex *next_v(vector<Vertex *> vertices, Vertex *v)
 {
   bool found = false;
@@ -159,7 +307,15 @@ Vertex *next_v(vector<Vertex *> vertices, Vertex *v)
   }
   return vertices[(i + 1) % vertices.size()];
 }
-
+/**
+ * @brief Subtract two vectors. Preserves the order of the first vector.
+ *
+ * Finds the elements of the first vector that are not in the second vector.
+ *
+ * @param a
+ * @param b
+ * @return vector<Vertex *>
+ */
 vector<Vertex *> subtract(vector<Vertex *> a, vector<Vertex *> b)
 {
   vector<Vertex *> result;
@@ -183,6 +339,13 @@ struct Rectangle
     this->x2 = x2;
     this->y2 = y2;
   }
+  /**
+   * @brief Check if a vertex is inside the rectangle
+   *
+   * @param v Vertex to be checked for.
+   * @return true If the vertex is on or inside the rectangle
+   * @return false Otherwise
+   */
   bool contains(Vertex *v)
   {
     return v->x >= x1 && v->x <= x2 && v->y >= y1 && v->y <= y2;
@@ -196,12 +359,24 @@ void print(vector<Vertex *> v)
   }
 }
 
+/**
+ * @brief Chops off a convex polygon from the given one
+ *
+ * Uses a clockwise sweep to find a convex polygon
+ * If no convex polygon starting from the first vertex in
+ * `vertices` is found, this returns two points (the first
+ *  and second)
+ *
+ *
+ * @param vertices
+ * @return vector<Vertex *>
+ */
 vector<Vertex *> decompose(vector<Vertex *> vertices)
 {
   DCEL dcel_p, dcel_l;
   dcel_p.initialize(vertices);
   vector<Vertex *> L = {vertices[0]};
-  cout << "init" << dcel_p.vertices.size() << endl;
+  // cout << "init" << dcel_p.vertices.size() << endl;
 
   while (dcel_p.vertices.size() > 3)
   {
@@ -238,13 +413,15 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
       /// v(i+1) = Next[P, v(i)]
       v.push_back(next_v(dcel_p.vertices, v[i]));
     } // while
+    if (L.size() == 2)
+      return dcel_p.vertices;
     if (L.size() != dcel_p.vertices.size())
     {
       /// P = P - L
       auto LPVS = subtract(dcel_p.vertices, L);
       auto no_notches = subtract(LPVS, notches_in_p);
       LPVS = subtract(LPVS, no_notches);
-      print(LPVS);
+      // print(LPVS);
       while (LPVS.size() > 0)
       {
         auto min_x = min_element(LPVS.begin(), LPVS.end(), [](Vertex *a, Vertex *b)
@@ -320,34 +497,45 @@ vector<Vertex *> decompose(vector<Vertex *> vertices)
       {
         decomposition.push_back(L);
         diagonals.push_back({L.back(), L.front()});
-        std::cout
-            << "Found convex polygon" << std::endl;
-        print(L);
+        // std::cout
+        // << "Found convex polygon" << std::endl;
+        // print(L);
       }
       // insert L.back() as first of dcel_p.vertices
       // dcel_p.vertices.insert(dcel_p.vertices.begin(), L.back());
       // dcel_p.vertices.insert(dcel_p.vertices.begin(), L.front());
-      cout << "----New P----\n";
-      print(dcel_p.vertices);
+      // cout << "----New P----\n";
+      // print(dcel_p.vertices);
       dcel_p.init();
     }
     else
     {
       // L has 2 vertices
-      cout << "L failed to form a convex polygon" << endl;
+      // cout << "L failed to form a convex polygon" << endl;
       return dcel_p.vertices;
     }
   }
   return dcel_p.vertices;
 }
-
+/**
+ * @brief Reads vertices from a file
+ *
+ * The first line of the file should contain the number of vertices
+ * Following lines should contain the x and y coordinates of the vertices,
+ * separated by a space.
+ *
+ * @param filename Filename to read from
+ * @return vector<Vertex *>
+ */
 vector<Vertex *> read_vertices(char *filename)
 {
   vector<Vertex *> vertices;
   ifstream file;
   file.open(filename);
+  // int n = number_of_lines(filename);
   int n;
   file >> n;
+
   for (int i = 0; i < n; i++)
   {
     double x, y;
@@ -357,5 +545,7 @@ vector<Vertex *> read_vertices(char *filename)
     v->y = y;
     vertices.push_back(v);
   }
+  // reverse and return
+  // reverse(vertices.begin(), vertices.end());
   return vertices;
 }
