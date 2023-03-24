@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Decompositon of Polygon: Main Page</title>
+<title>Decompositon of Polygon: Polygon Decomposition</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,10 +68,70 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Decompositon of Polygon Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Polygon <a class="el" href="structDecomposition.html">Decomposition</a> </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="mainpage"></a> </p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Decompose Polygon into convex polygons</h1>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Creating polygons</h2>
+<h3><a class="anchor" id="autotoc_md2"></a>
+Format of a polygon file</h3>
+<p>For a polygon of n points, the file has n+1 lines of which the first line has the number of vertices and the remaining n lines have the vertices listed one on each line. A vertex on a line has x and coordinates separated by a space.</p>
+<div class="fragment"><div class="line">{polygon.txt} </div>
+<div class="line">3</div>
+<div class="line">0 0</div>
+<div class="line">0 1</div>
+<div class="line">1 1</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md3"></a>
+One polygon</h3>
+<p><code>python3 draw.py gen [number of points]</code> saves the list of vertices in clockwise order in <code>input_gen.txt</code>.</p>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Multiple polygons</h3>
+<p>Run <code>python3 draw.py gen_dir [number_of_polygons]</code> to generate polygons and save them to <code>tests/</code>.</p>
+<blockquote class="doxtable">
+<p>&zwj;Note that tests/ directory should exist. </p>
+</blockquote>
+<p>Polygons are saved in <code>[number_of_points].txt</code> files. Ex. <code>24.txt</code> will have 24 vertices.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Visualizing the polygons</h2>
+<h3><a class="anchor" id="autotoc_md6"></a>
+Visualizing a (maybe nonconvex) polygon</h3>
+<p><code>python3 draw.py draw [filename]</code></p>
+<h3><a class="anchor" id="autotoc_md7"></a>
+Visualizing a decomposition</h3>
+<p><code>python3 draw.py decomp [filename]</code></p>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Input format</h2>
+<p>Enter the polygon in <code>input_py.txt</code> (or any other file) with each point on one line with its coordinates (x, y) separated by a space. Specify total number of points on the first line.</p>
+<blockquote class="doxtable">
+<p>&zwj;The points must be in clockwise order </p>
+</blockquote>
+<div class="fragment"><div class="line">[number of points]</div>
+<div class="line">x1 y1</div>
+<div class="line">x2 y2</div>
+<div class="line">...</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+Running the program</h2>
+<p>Compile the program: <code>g++ <a class="el" href="main_8cpp.html" title="Decomposes a polygon into convex polygons.">src/main.cpp</a> <a class="el" href="dcel_8cpp.html" title="Helper functions for DCEL.">src/dcel.cpp</a> <a class="el" href="merge_8cpp.html">src/merge.cpp</a> -o main</code></p>
+<p>You can run a single file or a series of testcases in a folder. Specify the path to the file or folder as the command line argument.</p>
+<p>Ex. <code>./main spain.txt</code> will decompose the polygon in <code>spain.txt</code>. This will log the time taken in <code>timelog.txt</code> in microseconds. Ex. <code>./main countries/</code> will decompose all polygons in <code>countries/</code> and log the time taken and number of vertices in <code>timelog.txt</code> in microseconds.</p>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Output format</h2>
+<p>The program writes the decomposed (and merged) polgons to <code>[filename]_merged.txt</code> with the number of polygons on the first line and for each polygon, the number of points in that polygon followed by its points as in the input format.</p>
+<p>Decomposed polygons not merged are saved to <code>[filename]_decomposition.txt</code>. Ex. <code>./main countries/spain.txt</code> will save the decomposition (without merging) to <code>countries/spain_decomposition.txt</code> and save the merged decomposition to <code>countries/spain_merged.txt</code></p>
+<div class="fragment"><div class="line">[number of polygons]</div>
+<div class="line">[points in polygon 1]</div>
+<div class="line">x1 y1</div>
+<div class="line">x2 y2</div>
+<div class="line">[points in polygon 2]</div>
+<div class="line">x1 y1</div>
+<div class="line">x2 y2</div>
+<div class="line">...</div>
+</div><!-- fragment --><p>You can then use the visualizing programs mentioned above the view the output. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,0 +1,35 @@
+\hypertarget{md_src_README_autotoc_md1}{}\doxysection{Creating polygons}\label{md_src_README_autotoc_md1}
+Run {\ttfamily python3 draw.\+py gen} to generate polygons and save it to {\ttfamily input\+\_\+py.\+txt}.\hypertarget{md_src_README_autotoc_md2}{}\doxysection{Input format}\label{md_src_README_autotoc_md2}
+Enter the polygon in {\ttfamily input\+\_\+py.\+txt} (or any other file) with each point on one line with its coordinates (x, y) separated by a space. Specify total number of points on the first line.
+
+\begin{quote}
+The points must be in clockwise order \end{quote}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[number\ of\ points]}
+\DoxyCodeLine{x1\ y1}
+\DoxyCodeLine{x2\ y2}
+\DoxyCodeLine{...}
+
+\end{DoxyCode}
+\hypertarget{md_src_README_autotoc_md3}{}\doxysection{Running the program}\label{md_src_README_autotoc_md3}
+Run {\ttfamily bash run.\+bash}\hypertarget{md_src_README_autotoc_md4}{}\doxysection{Output format}\label{md_src_README_autotoc_md4}
+The program writes the decomposed (and merged) polgons to {\ttfamily output.\+txt} with the number of polygons on the first line and for each polygon, the number of points in that polygon followed by its points as in the input format.
+
+Decomposed polygons not merged are saved to {\ttfamily decomposition.\+txt}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[number\ of\ polygons]}
+\DoxyCodeLine{[points\ in\ polygon\ 1]}
+\DoxyCodeLine{x1\ y1}
+\DoxyCodeLine{x2\ y2}
+\DoxyCodeLine{[points\ in\ polygon\ 2]}
+\DoxyCodeLine{x1\ y1}
+\DoxyCodeLine{x2\ y2}
+\DoxyCodeLine{...}
+
+\end{DoxyCode}
+
+
+The program opens a window displaying the decomposition without merging. On closing this window it opens another window showing the decomposition after merging. 

@@ -3,6 +3,9 @@
  * @brief Decomposes a polygon into convex polygons
  * @version 0.1
  * @date 2023-03-19
+ * @authors Akshat, Arya, Sanidhya, Kushal
+ *
+ * IDs: 2020A7PS0284H, 2020A7TS2068H, 2020A7PS2056H, 2020A7PS2083H
  *
  * This has the main decomposition algorithm.
  *
@@ -79,11 +82,12 @@ vector<Vertex *> rotate_forward(vector<Vertex *> v)
   return result;
 }
 
-void writePolygons(vector<DCEL *> polygons)
+void writePolygons(vector<DCEL *> polygons, char *filename)
 {
   // cout << "Open output.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
   ofstream myfile;
-  myfile.open("output.txt");
+  string filename_str = filename;
+  myfile.open(filename_str + "_merged.txt");
   myfile << polygons.size() << endl;
   for (int i = 0; i < polygons.size(); i++)
   {
@@ -101,12 +105,14 @@ void writePolygons(vector<DCEL *> polygons)
  * @brief Writes the decomposition to a file
  *
  * @param decomposition Vector of polygons as a vector of vertices
+ * @param filename The filename to write to
  */
-void writeDecomposition(vector<vector<Vertex *>> decomposition)
+void writeDecomposition(vector<vector<Vertex *>> decomposition, char *filename)
 {
   // cout << "Open decomposition.txt to see the output\nFormat:\n[total polygons]\n[vertices in polygon 1]\n[x1 y1]\n[x2 y2]\n[vertices in polygon 2]\n[x1 y1]\n[x2 y2]\n...\n";
   ofstream myfile;
-  myfile.open("decomposition.txt");
+  string filename_str = filename;
+  myfile.open(filename_str + "_decomp.txt");
   myfile << decomposition.size() << endl;
   for (int i = 0; i < decomposition.size(); i++)
   {
@@ -120,6 +126,15 @@ void writeDecomposition(vector<vector<Vertex *>> decomposition)
   }
   myfile.close();
 }
+struct RunningTime
+{
+  /// Time taken to decompose in microseconds
+  int decompose;
+  int merge;
+  int total;
+  int notches;
+};
+
 /**
  * @brief Decompose a polygon in the file
  *
@@ -128,13 +143,17 @@ void writeDecomposition(vector<vector<Vertex *>> decomposition)
  *
  * @param filename The polygon testcase file
  */
-void run_for_testcase(char *filename)
+RunningTime run_for_testcase(char *filename)
 {
+  RunningTime rt;
   decomposition.clear();
   vector<Vertex *> vertices;
   vertices = read_vertices(filename);
   auto vertices_copy = vertices;
-  // cout << "Starting decomposition\n";
+  DCEL dcel;
+  dcel.initialize(vertices);
+  rt.notches = dcel.get_notches().size();
+  auto start = chrono::high_resolution_clock::now();
   auto new_p_vertices = decompose(vertices);
   while (new_p_vertices.size() > 3)
   {
@@ -147,10 +166,15 @@ void run_for_testcase(char *filename)
     lastPolygonWasConstructed = true;
     decomposition.push_back(new_p_vertices);
   }
-  //   testDCEL(vertices);
-  writeDecomposition(decomposition);
+  auto end = chrono::high_resolution_clock::now();
+  rt.decompose = chrono::duration_cast<chrono::microseconds>(end - start).count();
+  writeDecomposition(decomposition, filename);
   // testMerge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
+  start = chrono::high_resolution_clock::now();
   auto final_polygons = merge(decomposition, vertices_copy, diagonals, lastPolygonWasConstructed);
+  end = chrono::high_resolution_clock::now();
+  rt.merge = chrono::duration_cast<chrono::microseconds>(end - start).count();
+  rt.total = rt.decompose + rt.merge;
   // auto final_polygons = decomposition;
   // cout << "----Final merged polyons----\n";
   // for (auto p : final_polygons)
@@ -158,7 +182,8 @@ void run_for_testcase(char *filename)
   //   // cout << "\n---Final polygon---\n";
   //   // p->print();
   // }
-  writePolygons(final_polygons);
+  writePolygons(final_polygons, filename);
+  return rt;
 }
 /**
  * @brief Run for all files ending with .txt in this directory
@@ -173,6 +198,7 @@ void run_and_time_for_directory(char *directory)
   DIR *dir = opendir(directory);
   ofstream timelogfile;
   timelogfile.open("timelog.txt", ios::app);
+  timelogfile << "n notches decompose merge total" << endl;
   struct dirent *ent;
   while ((ent = readdir(dir)) != NULL)
   {
@@ -185,16 +211,14 @@ void run_and_time_for_directory(char *directory)
     // check if extension is .txt
     if (filename[strlen(filename) - 1] != 't' || filename[strlen(filename) - 2] != 'x' || filename[strlen(filename) - 3] != 't' || filename[strlen(filename) - 4] != '.')
       continue;
-    auto start = chrono::high_resolution_clock::now();
-    run_for_testcase(filename);
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+    cout << "Running for " << filename << endl;
+    auto rt = run_for_testcase(filename);
     ifstream file;
     file.open(filename);
     int n;
     file >> n;
     file.close();
-    timelogfile << n << " " << duration.count() << endl;
+    timelogfile << n << " " << rt.notches << " " << rt.decompose << " " << rt.merge << " " << rt.total << endl;
   }
   closedir(dir);
   timelogfile.close();
@@ -208,13 +232,11 @@ void run_and_time_for_directory(char *directory)
  */
 void run_and_time_one_file(char *filename)
 {
-  auto start = chrono::high_resolution_clock::now();
   ofstream timelogfile;
   timelogfile.open("timelog.txt", ios::app);
-  run_for_testcase(filename);
-  auto stop = chrono::high_resolution_clock::now();
-  auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-  timelogfile << duration.count() << endl;
+  auto rt = run_for_testcase(filename);
+  timelogfile << "decompose merge total" << endl;
+  timelogfile << rt.decompose << " " << rt.merge << " " << rt.total << endl;
   timelogfile.close();
 }
 int main(int argc, char *argv[])
@@ -321,7 +343,20 @@ vector<Vertex *> subtract(vector<Vertex *> a, vector<Vertex *> b)
   vector<Vertex *> result;
   for (auto v : a)
   {
-    if (find(b.begin(), b.end(), v) == b.end())
+    // if (find(b.begin(), b.end(), v) == b.end())
+    // {
+    //   result.push_back(v);
+    // }
+    bool found = false;
+    for (auto w : b)
+    {
+      if (v->x == w->x && v->y == w->y)
+      {
+        found = true;
+        break;
+      }
+    }
+    if (!found)
     {
       result.push_back(v);
     }

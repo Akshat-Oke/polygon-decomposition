@@ -1,0 +1,10 @@
+input: retype/
+output: docs/retype
+branding:
+  title: Polygon Decomposition
+  label: Report
+links:
+  - text: GitHub
+    link: https://github.com/Akshat-Oke/polygon-decomposition
+  - text: Run online
+    link: /jsapp/index.html

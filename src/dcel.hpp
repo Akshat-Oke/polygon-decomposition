@@ -239,6 +239,47 @@ public:
 
     add_face(f);
   }
+  Vertex *get_or_create_vertex(Vertex *v)
+  {
+    for (auto v1 : vertices)
+    {
+      if (v1 == (v))
+      {
+        return v1;
+      }
+    }
+    add_vertex(v);
+    return v;
+  }
+  DCEL *from_decomposition(vector<vector<Vertex *>> vertices)
+  {
+    DCEL *dcel = new DCEL();
+    dcel->initialize(vertices[0]);
+    DCEL temp;
+    for (int i = 1; i < vertices.size(); i++)
+    {
+      auto polygonVertices = vertices[i];
+      Face *face = new Face();
+      // temp.initialize(polygonVertices);
+      for (int j = 0; j < polygonVertices.size(); j++)
+      {
+        auto vertex = get_or_create_vertex(polygonVertices[j]);
+        auto nextVertex = get_or_create_vertex(polygonVertices[(j + 1) % polygonVertices.size()]);
+        if (vertex->incident_edge)
+        {
+          vertex->incident_edge->incident_face = face;
+        }
+        else
+        {
+          vertex->incident_edge = new HalfEdge();
+          vertex->incident_edge->origin = vertex;
+          vertex->incident_edge->incident_face = face;
+          nextVertex->incident_edge = new HalfEdge();
+          nextVertex->incident_edge->origin = nextVertex;
+        }
+      }
+    }
+  }
 };
 
 struct Decomposition

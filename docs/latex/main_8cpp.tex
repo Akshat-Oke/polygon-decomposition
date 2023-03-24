@@ -35,9 +35,9 @@ void \mbox{\hyperlink{main_8cpp_a4da6bcd803ec408a014e245119d59c21}{test\+DCEL}} 
 \item 
 vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_ae90b99a8d60840c42396033a3969438f}{rotate\+\_\+forward}} (vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ v)
 \begin{DoxyCompactList}\small\item\em Rotates a vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}{write\+Polygons}} (vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}{polygons}})
+void \mbox{\hyperlink{main_8cpp_a6a0d947e50f4eff5335399726173bfd3}{write\+Polygons}} (vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$ \mbox{\hyperlink{merge_8hpp_a8916cb8c84a5904c20213f238790e5d2}{polygons}}, char $\ast$filename)
 \item 
-void \mbox{\hyperlink{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}{write\+Decomposition}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}})
+void \mbox{\hyperlink{main_8cpp_ac30a6c29339451d8188059d3a86b7d56}{write\+Decomposition}} (vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$ \mbox{\hyperlink{main_8cpp_adbbbd164dde5c86f92908b07c67161c8}{decomposition}}, char $\ast$filename)
 \begin{DoxyCompactList}\small\item\em Writes the decomposition to a file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8cpp_a677adf3294c791e79df51fd1c81c9e69}{run\+\_\+for\+\_\+testcase}} (char $\ast$filename)
 \begin{DoxyCompactList}\small\item\em Decompose a polygon in the file. \end{DoxyCompactList}\item 
@@ -289,11 +289,11 @@ vector$<$\+Vertex $\ast$$>$
 \doxysubsubsection{\texorpdfstring{testDCEL()}{testDCEL()}}
 {\footnotesize\ttfamily void test\+DCEL (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$}]{LPVS }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}\label{main_8cpp_ac68001e6a496d7b7ccce5f2b6f4ef34c}} 
+\mbox{\Hypertarget{main_8cpp_ac30a6c29339451d8188059d3a86b7d56}\label{main_8cpp_ac30a6c29339451d8188059d3a86b7d56}} 
 \index{main.cpp@{main.cpp}!writeDecomposition@{writeDecomposition}}
 \index{writeDecomposition@{writeDecomposition}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{writeDecomposition()}{writeDecomposition()}}
-{\footnotesize\ttfamily void write\+Decomposition (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{decomposition }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void write\+Decomposition (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structVertex}{Vertex}} $\ast$ $>$ $>$}]{decomposition,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
 
 
 
@@ -303,12 +303,14 @@ Writes the decomposition to a file.
 \begin{DoxyParams}{Parameters}
 {\em decomposition} & Vector of polygons as a vector of vertices \\
 \hline
+{\em filename} & The filename to write to \\
+\hline
 \end{DoxyParams}
-\mbox{\Hypertarget{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}\label{main_8cpp_a2a1cc75b64e5f04ada592a7739eefb74}} 
+\mbox{\Hypertarget{main_8cpp_a6a0d947e50f4eff5335399726173bfd3}\label{main_8cpp_a6a0d947e50f4eff5335399726173bfd3}} 
 \index{main.cpp@{main.cpp}!writePolygons@{writePolygons}}
 \index{writePolygons@{writePolygons}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{writePolygons()}{writePolygons()}}
-{\footnotesize\ttfamily void write\+Polygons (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$}]{polygons }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void write\+Polygons (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classDCEL}{DCEL}} $\ast$ $>$}]{polygons,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
 
 
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@8.4.2/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Simple Line Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      #container {
+        background-color: #f0f0f0;
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      #actions {
+        height: 100%;
+        width: 100%;
+        flex: 1;
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        outline: none;
+        border: none;
+        background-color: rgb(32, 222, 177);
+        padding: 8px;
+        height: min-content;
+        border-radius: 5px;
+      }
+      button:hover {
+        cursor: pointer;
+        box-shadow: 0 0 5px 1px rgb(32, 222, 177);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="actions">
+      <button id="finish">Finish polygon</button>
+    </div>
+    <script>
+      var width = window.innerWidth;
+      var height = window.innerHeight * 0.8;
+
+      var stage = new Konva.Stage({
+        container: "container",
+        width: width,
+        height: height,
+      });
+
+      var layer = new Konva.Layer();
+
+      let last_point = null;
+
+      var redLine = new Konva.Line({
+        points: [],
+        stroke: "red",
+        strokeWidth: 8,
+        lineCap: "round",
+        lineJoin: "round",
+      });
+      layer.add(redLine);
+
+      // add the layer to the stage
+      stage.add(layer);
+      stage.on("pointerclick", function (e) {
+        var mousePos = stage.getPointerPosition();
+        //round off to zero decimal places
+        console.log(mousePos.x, mousePos.y);
+        mousePos.x = Math.round(mousePos.x / 10) * 10;
+        mousePos.y = Math.round(mousePos.y / 10) * 10;
+        console.log(mousePos.x, mousePos.y);
+        if (last_point == null) {
+          last_point = mousePos;
+          redLine.points([mousePos.x, mousePos.y]);
+        } else {
+          redLine.points(redLine.points().concat([mousePos.x, mousePos.y]));
+          last_point = mousePos;
+          // layer.draw();
+        }
+      });
+      document.getElementById("finish").addEventListener("click", (e) => {
+        redLine.points(
+          redLine.points().concat([redLine.points()[0], redLine.points()[1]])
+        );
+      });
+    </script>
+  </body>
+</html>

@@ -85,7 +85,7 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
   NP += lastPolygonWasConstructed;
   for (int j = 0; j < m; j++)
   {
-    // cout << "\n---New iteration---NP is " << NP << endl;
+    // cout << "\n---New iteration---NP is " << NP << " j=" << j << endl;
     auto vs = LLE[j]->vs;
     auto vt = LLE[j]->vt;
     auto LP_vs = LP(vs);
@@ -127,6 +127,14 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
       if (ang_leq_180(i1, i2, i3) && ang_leq_180(j1, j2, j3))
       {
         // cout << "Found polygon merging " << j << " and " << u << endl;
+        auto new_polygon_vertices = subtract(original_vertices, polygons[LUP[j]]->vertices);
+        new_polygon_vertices = subtract(new_polygon_vertices, polygons[LUP[u]]->vertices);
+        new_polygon_vertices = subtract(original_vertices, new_polygon_vertices);
+        if (*(new_polygon_vertices.front()) == *(new_polygon_vertices.back()))
+        {
+          new_polygon_vertices.pop_back();
+        }
+
         LDP[j] = false;
         LDP[u] = false;
         // LDP[NP] = true;
@@ -138,6 +146,8 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
         {
           LDP.push_back(true);
         }
+        int saved_LUP_j = LUP[j];
+        int saved_LUP_u = LUP[u];
         LUP[j] = NP - 1;
         LUP[u] = NP - 1;
         if (NP - 1 < LUP.size())
@@ -150,28 +160,28 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
         }
         for (int h = 0; h < LUP.size(); h++)
         {
-          if (LUP[h] == j || LUP[h] == u)
-          {
+          // if (LUP[h] == j || LUP[h] == u)
+          // {
+          //   LUP[h] = NP - 1;
+          // }//?
+          if (LUP[h] == saved_LUP_j || LUP[h] == saved_LUP_u)
             LUP[h] = NP - 1;
-          }
         }
 
         NP += 1;
 
-        auto new_polygon_vertices = subtract(original_vertices, polygons[j]->vertices);
-        new_polygon_vertices = subtract(new_polygon_vertices, polygons[u]->vertices);
-        new_polygon_vertices = subtract(original_vertices, new_polygon_vertices);
         // cout << "\n\nNew poly vertices are:\n";
         // for (auto v : new_polygon_vertices)
         // {
         //   v->print();
         // }
-        // cout << "\n\n";
         DCEL *new_polygon = new DCEL;
         new_polygon->initialize(new_polygon_vertices);
-        if (NP - 1 < polygons.size())
+        // cout << "Setting " << NP - 2 << "th polygon as new polygon\n";
+        // cout << "\n\n";
+        if (NP - 2 < polygons.size())
         {
-          polygons[NP - 1] = new_polygon;
+          polygons[NP - 2] = new_polygon;
         }
         else
         {
@@ -191,6 +201,13 @@ vector<DCEL *> merge(vector<vector<Vertex *>> decomposition, vector<Vertex *> or
       final_polygons.push_back(polygons[LUP[i]]);
     }
   }
+  // for (int i = 0; i < LUP.size(); i++)
+  // {
+  //   if (LDP[i])
+  //   {
+  //     final_polygons.push_back(polygons[i]);
+  //   }
+  // }
 
   return final_polygons;
 }
@@ -236,6 +253,7 @@ void initMerge(vector<vector<Vertex *>> decomposition, vector<Vertex *> original
   static bool initialized = false;
   if (initialized)
     return;
+  cout << "Last polygon was constructed" << lastPolygonWasConstructed << endl;
   original_vertices = original_v;
   for (auto polygon : decomposition)
   {
@@ -295,7 +313,7 @@ vector<pair<int, Vertex *>> LP(Vertex *v)
       auto next_vertex = vertices[(i + 1) % vertices.size()];
       if (vertex == v && next_v(original_vertices, vertex) != next_vertex)
       {
-        result.push_back(make_pair(ip, next_vertex));
+        result.push_back(make_pair(LUP[ip], next_vertex));
       }
     }
   }

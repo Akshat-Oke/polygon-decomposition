@@ -1,0 +1,63 @@
+\label{index_mainpage}%
+\Hypertarget{index_mainpage}%
+ \hypertarget{index_autotoc_md0}{}\doxysection{Decompose Polygon into convex polygons}\label{index_autotoc_md0}
+\hypertarget{index_autotoc_md1}{}\doxysubsection{Creating polygons}\label{index_autotoc_md1}
+\hypertarget{index_autotoc_md2}{}\doxysubsubsection{Format of a polygon file}\label{index_autotoc_md2}
+For a polygon of n points, the file has n+1 lines of which the first line has the number of vertices and the remaining n lines have the vertices listed one on each line. A vertex on a line has x and coordinates separated by a space.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{polygon.txt\}\ }
+\DoxyCodeLine{3}
+\DoxyCodeLine{0\ 0}
+\DoxyCodeLine{0\ 1}
+\DoxyCodeLine{1\ 1}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md3}{}\doxysubsubsection{One polygon}\label{index_autotoc_md3}
+{\ttfamily python3 draw.\+py gen \mbox{[}number of points\mbox{]}} saves the list of vertices in clockwise order in {\ttfamily input\+\_\+gen.\+txt}.\hypertarget{index_autotoc_md4}{}\doxysubsubsection{Multiple polygons}\label{index_autotoc_md4}
+Run {\ttfamily python3 draw.\+py gen\+\_\+dir \mbox{[}number\+\_\+of\+\_\+polygons\mbox{]}} to generate polygons and save them to {\ttfamily tests/}.
+
+\begin{quote}
+Note that tests/ directory should exist. \end{quote}
+Polygons are saved in {\ttfamily \mbox{[}number\+\_\+of\+\_\+points\mbox{]}.txt} files. Ex. {\ttfamily 24.\+txt} will have 24 vertices.\hypertarget{index_autotoc_md5}{}\doxysubsection{Visualizing the polygons}\label{index_autotoc_md5}
+\hypertarget{index_autotoc_md6}{}\doxysubsubsection{Visualizing a (maybe nonconvex) polygon}\label{index_autotoc_md6}
+{\ttfamily python3 draw.\+py draw \mbox{[}filename\mbox{]}}\hypertarget{index_autotoc_md7}{}\doxysubsubsection{Visualizing a decomposition}\label{index_autotoc_md7}
+{\ttfamily python3 draw.\+py decomp \mbox{[}filename\mbox{]}}\hypertarget{index_autotoc_md8}{}\doxysubsection{Input format}\label{index_autotoc_md8}
+Enter the polygon in {\ttfamily input\+\_\+py.\+txt} (or any other file) with each point on one line with its coordinates (x, y) separated by a space. Specify total number of points on the first line.
+
+\begin{quote}
+The points must be in clockwise order \end{quote}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[number\ of\ points]}
+\DoxyCodeLine{x1\ y1}
+\DoxyCodeLine{x2\ y2}
+\DoxyCodeLine{...}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md9}{}\doxysubsection{Running the program}\label{index_autotoc_md9}
+Compile the program\+: {\ttfamily g++ \mbox{\hyperlink{main_8cpp}{src/main.\+cpp}} \mbox{\hyperlink{dcel_8cpp}{src/dcel.\+cpp}} \mbox{\hyperlink{merge_8cpp}{src/merge.\+cpp}} -\/o main}
+
+You can run a single file or a series of testcases in a folder. Specify the path to the file or folder as the command line argument.
+
+Ex. {\ttfamily ./main spain.\+txt} will decompose the polygon in {\ttfamily spain.\+txt}. This will log the time taken in {\ttfamily timelog.\+txt} in microseconds. Ex. {\ttfamily ./main countries/} will decompose all polygons in {\ttfamily countries/} and log the time taken and number of vertices in {\ttfamily timelog.\+txt} in microseconds.\hypertarget{index_autotoc_md10}{}\doxysubsection{Output format}\label{index_autotoc_md10}
+The program writes the decomposed (and merged) polgons to {\ttfamily \mbox{[}filename\mbox{]}\+\_\+merged.\+txt} with the number of polygons on the first line and for each polygon, the number of points in that polygon followed by its points as in the input format.
+
+Decomposed polygons not merged are saved to {\ttfamily \mbox{[}filename\mbox{]}\+\_\+decomposition.\+txt}. Ex. {\ttfamily ./main countries/spain.\+txt} will save the decomposition (without merging) to {\ttfamily countries/spain\+\_\+decomposition.\+txt} and save the merged decomposition to {\ttfamily countries/spain\+\_\+merged.\+txt}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[number\ of\ polygons]}
+\DoxyCodeLine{[points\ in\ polygon\ 1]}
+\DoxyCodeLine{x1\ y1}
+\DoxyCodeLine{x2\ y2}
+\DoxyCodeLine{[points\ in\ polygon\ 2]}
+\DoxyCodeLine{x1\ y1}
+\DoxyCodeLine{x2\ y2}
+\DoxyCodeLine{...}
+
+\end{DoxyCode}
+
+
+You can then use the visualizing programs mentioned above the view the output. 
