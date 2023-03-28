@@ -17,4 +17,5 @@ def save_country(name):
                 file.write(str(coordinate[0]) + " " + str(coordinate[1]) + "\n")
             break
 if __name__ == "__main__":
-    save_country(sys.argv[1])
+    # save_country(sys.argv[1])
+    save_country("South Korea")

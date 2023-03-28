@@ -3,7 +3,7 @@
   <head>
     <script src="https://unpkg.com/konva@8.4.2/konva.min.js"></script>
     <meta charset="utf-8" />
-    <title>Konva Simple Line Demo</title>
+    <title>Polygon Decomposition</title>
     <style>
       body {
         margin: 0;
@@ -41,16 +41,23 @@
         cursor: pointer;
         box-shadow: 0 0 5px 1px rgb(32, 222, 177);
       }
+      button:not(:last-child) {
+        margin-right: 10px;
+      }
     </style>
   </head>
   <body>
     <div id="container"></div>
     <div id="actions">
       <button id="finish">Finish polygon</button>
+      <button id="decompose">Decompose</button>
+      <br />
+      <button id="toggle-decomp">Toggle decomposition</button>
+      <button id="toggle-merge">Toggle merged</button>
     </div>
     <script>
       var width = window.innerWidth;
-      var height = window.innerHeight * 0.8;
+      var height = window.innerHeight * 0.9;
 
       var stage = new Konva.Stage({
         container: "container",
@@ -59,20 +66,29 @@
       });
 
       var layer = new Konva.Layer();
+      const decompositionLayer = new Konva.Layer();
+      decompositionLayer.opacity(0.5);
+      const mergingLayer = new Konva.Layer();
+      mergingLayer.opacity(0.7);
+      let new_polygon = true;
 
       let last_point = null;
 
       var redLine = new Konva.Line({
         points: [],
         stroke: "red",
-        strokeWidth: 8,
+        strokeWidth: 4,
         lineCap: "round",
         lineJoin: "round",
       });
+
       layer.add(redLine);
 
       // add the layer to the stage
       stage.add(layer);
+      stage.add(decompositionLayer);
+      stage.add(mergingLayer);
+
       stage.on("pointerclick", function (e) {
         var mousePos = stage.getPointerPosition();
         //round off to zero decimal places
@@ -83,6 +99,16 @@
         if (last_point == null) {
           last_point = mousePos;
           redLine.points([mousePos.x, mousePos.y]);
+          //show the point
+          var circle = new Konva.Circle({
+            x: mousePos.x,
+            y: mousePos.y,
+            radius: 1,
+            fill: "red",
+            stroke: "red",
+            strokeWidth: 1,
+          });
+          layer.add(circle);
         } else {
           redLine.points(redLine.points().concat([mousePos.x, mousePos.y]));
           last_point = mousePos;
@@ -94,6 +120,92 @@
           redLine.points().concat([redLine.points()[0], redLine.points()[1]])
         );
       });
+      document.getElementById("decompose").addEventListener("click", (e) => {
+        getDecomposition(redLine.points());
+      });
+      let decomp = true;
+      document
+        .getElementById("toggle-decomp")
+        .addEventListener("click", (e) => {
+          if (decomp) {
+            decompositionLayer.hide();
+          } else {
+            decompositionLayer.show();
+          }
+          decomp = !decomp;
+        });
+      let merge = true;
+      document.getElementById("toggle-merge").addEventListener("click", (e) => {
+        if (merge) {
+          mergingLayer.hide();
+        } else {
+          mergingLayer.show();
+        }
+        merge = !merge;
+      });
+
+      async function getDecomposition(points) {
+        //Create the input object for the decomposition
+        const input = [];
+        for (let i = 0; i < points.length; i += 2) {
+          input.push([points[i], points[i + 1]]);
+        }
+        input.pop();
+        //reverse input
+        input.reverse();
+        const response = await postData("http://localhost:5000/decompose", {
+          polygon: input,
+        });
+        const decomposition = response.decomposition;
+        const merged = response.merged;
+        drawDecomposition(decomposition, decompositionLayer);
+        drawDecomposition(merged, mergingLayer);
+      }
+
+      function getRandomColorInHex() {
+        //get a light color
+        let color = Math.floor(Math.random() * 16777215).toString(16);
+        //make sure it's light
+        while (color.length < 6) {
+          color = "0" + color;
+        }
+        return "#" + color;
+      }
+
+      function drawDecomposition(decomposition, layer) {
+        for (const polygon of decomposition) {
+          const poly = new Konva.Line({
+            points: flattenPolygon(polygon),
+            fill: getRandomColorInHex(),
+            stroke: "#444",
+            strokeWidth: 3,
+            closed: true,
+          });
+          layer.add(poly);
+        }
+        function flattenPolygon(polygon) {
+          const points = [];
+          for (const point of polygon) {
+            points.push(point[0]);
+            points.push(point[1]);
+          }
+          return points;
+        }
+      }
+
+      async function postData(url = "", data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          // mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
     </script>
+    <script src="app.js" type="module"></script>
   </body>
 </html>

@@ -71,6 +71,9 @@ export class DCEL {
     }
     return this.vertices[(i - 1 + this.vertices.length) % this.vertices.length];
   }
+  init() {
+    this.initialize(this.vertices);
+  }
   initialize(verts) {
     this.vertices = verts;
     for (let i = 0; i < verts.length; i++) {

@@ -155,13 +155,30 @@ RunningTime run_for_testcase(char *filename)
   rt.notches = dcel.get_notches().size();
   auto start = chrono::high_resolution_clock::now();
   auto new_p_vertices = decompose(vertices);
+  bool addPolygon = false;
+  int same_size_count = 0;
   while (new_p_vertices.size() > 3)
   {
+    cout << "Hello " << new_p_vertices.size() << endl;
     new_p_vertices = rotate_forward(new_p_vertices);
+    int old_size = new_p_vertices.size();
     new_p_vertices = decompose(new_p_vertices);
+    if (old_size == new_p_vertices.size())
+    {
+      same_size_count++;
+    }
+    else
+    {
+      same_size_count = 0;
+    }
+    if (same_size_count > old_size)
+    {
+      addPolygon = true;
+      break;
+    }
   }
   // add new_p_vertices as a decomposition if it has 3 vertices
-  if (new_p_vertices.size() == 3 && !colinear(new_p_vertices))
+  if (addPolygon || (new_p_vertices.size() == 3) && !colinear(new_p_vertices))
   {
     lastPolygonWasConstructed = true;
     decomposition.push_back(new_p_vertices);
